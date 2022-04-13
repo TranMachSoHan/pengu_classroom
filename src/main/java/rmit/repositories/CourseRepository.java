@@ -1,7 +1,7 @@
-package repository;
+package rmit.repositories;
 
-import model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
+import rmit.models.Course;
 
 public interface CourseRepository extends JpaRepository<Course, Integer> {
     

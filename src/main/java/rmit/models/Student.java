@@ -1,4 +1,4 @@
-package model;
+package rmit.models;
 
 import lombok.Data;
 import org.json.JSONArray;
@@ -9,11 +9,16 @@ import java.util.Collection;
 
 @Entity
 @Data
+@Table(name = "students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(name = "average_mark", nullable = false)
     private float average_mark;
+
+    @Column(name = "nickname", nullable = false)
     private String nickname;
 
     @OneToOne
@@ -27,6 +32,13 @@ public class Student {
     )
     private Collection<Course> courseCollection;
 
+    public Student(int id, float average_mark, String nickname, Account user, Collection<Course> courseCollection) {
+        this.id = id;
+        this.average_mark = average_mark;
+        this.nickname = nickname;
+        this.user = user;
+        this.courseCollection = courseCollection;
+    }
 
     public Student(Account user) {
         this.user = user;

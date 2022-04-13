@@ -1,4 +1,4 @@
-package exception;
+package rmit.exceptions;
 
 import java.util.Date;
 

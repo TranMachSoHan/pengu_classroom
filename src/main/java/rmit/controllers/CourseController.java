@@ -1,12 +1,11 @@
-package controller;
+package rmit.controllers;
 
-import exception.ResourceNotFoundException;
-import model.Course;
+import rmit.exceptions.ResourceNotFoundException;
+import rmit.models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
-import repository.CourseRepository;
+import rmit.repositories.CourseRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +58,6 @@ public class CourseController {
         this.courseRepository.delete(course);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
-
         return response;
     }
 }

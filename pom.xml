@@ -8,7 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from rmit.repository -->
     </parent>
 
     <properties>
@@ -69,7 +69,6 @@
             <artifactId>json</artifactId>
             <version>20140107</version>
         </dependency>
-
     </dependencies>
 
     <build>
