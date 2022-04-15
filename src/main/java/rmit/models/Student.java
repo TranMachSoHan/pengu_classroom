@@ -5,7 +5,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -32,6 +34,14 @@ public class Student {
     )
     private Collection<Course> courseCollection;
 
+
+
+//    public List<Enrollment> getEnrollmentList() {
+//        return enrollmentList;
+//    }
+
+
+
     public Student(int id, float average_mark, String nickname, Account user, Collection<Course> courseCollection) {
         this.id = id;
         this.average_mark = average_mark;
@@ -47,6 +57,7 @@ public class Student {
     public Student() {
 
     }
+
 
     @Override
     public String toString(){
@@ -66,4 +77,8 @@ public class Student {
         info = jsonInfo.toString();
         return info;
     }
+
+
+
+
 }

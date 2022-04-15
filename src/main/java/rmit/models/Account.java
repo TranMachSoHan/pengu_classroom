@@ -5,6 +5,8 @@ import lombok.Data;
 import org.json.JSONObject;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,6 +24,10 @@ public class Account {
 
     @Column(name = "profile_picture", nullable = true)
     private String profile_picture;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id")
+    private List<Enrollment> enrollmentList = new ArrayList<>();
 
     public Account(){}
 
@@ -50,4 +56,7 @@ public class Account {
         this.profile_picture = account.getProfile_picture();
     }
 
+    public void setEnrollmentList(List<Enrollment> enrollmentList) {
+        this.enrollmentList = enrollmentList;
+    }
 }
