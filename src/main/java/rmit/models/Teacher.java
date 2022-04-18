@@ -14,13 +14,15 @@ public class Teacher {
     private int id;
 
     @OneToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private Account account;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private Collection<Course> courses;
 
-    public Teacher(Account account) {this.setAccount(account);}
+    public Teacher(Account account) {
+        this.setAccount(account);
+    }
 
     public Teacher(int id, Account account, Collection<Course> courses) {
         this.id = id;
@@ -28,11 +30,13 @@ public class Teacher {
         this.courses = courses;
     }
 
-    public Teacher() {}
+    public Teacher() {
+    }
 
-    public void updateTeacher(Teacher teacher){
+    public void updateTeacher(Teacher teacher) {
         this.id = teacher.getId();
         this.account = teacher.getAccount();
         this.courses = teacher.getCourses();
-        }
+    }
+
 }
