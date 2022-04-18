@@ -29,4 +29,10 @@ public class Teacher {
     }
 
     public Teacher() {}
+
+    public void updateTeacher(Teacher teacher){
+        this.id = teacher.getId();
+        this.account = teacher.getAccount();
+        this.courses = teacher.getCourses();
+        }
 }
