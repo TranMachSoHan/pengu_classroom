@@ -33,13 +33,23 @@ public class Homework {
     @Column(name = "dueDate", nullable = false)
     private Date dueDate;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "submission_id")
+    private Submission submission;
+
+//    @Column(name="description", nullable = false) img
+//    @Column(name="submission", nullable = false) word
+
+    //string
+
     @ManyToOne
     @JoinColumn(name="enrollment_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Enrollment enrollment;
 
-    public Homework(int id, String courseCode, String title, float mark, String feedback, Boolean isSubmitted, Date dueDate) {
+    public Homework(int id, String courseCode, String title, float mark, String feedback,
+                    Boolean isSubmitted, Date dueDate, Submission submission, Enrollment enrollment) {
         this.id = id;
         this.courseCode = courseCode;
         this.title = title;
@@ -47,6 +57,8 @@ public class Homework {
         this.feedback = feedback;
         this.isSubmitted = isSubmitted;
         this.dueDate = dueDate;
+        this.submission = submission;
+        this.enrollment = enrollment;
     }
 
     public Homework() {}

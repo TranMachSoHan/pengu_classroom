@@ -12,8 +12,7 @@ public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-
+    
     @Column(name="courseCode", nullable = false)
     private String courseCode;
 
@@ -21,7 +20,7 @@ public class Enrollment {
     private Collection<Homework> homeworks;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private Account student;
+    private Student student;
 
 
     public Enrollment() {}
@@ -30,7 +29,7 @@ public class Enrollment {
         this.courseCode = courseCode;
     }
 
-    public Enrollment(int id, Account student, String courseCode, Collection<Homework> homeworks) {
+    public Enrollment(int id, Student student, String courseCode, Collection<Homework> homeworks) {
         this.id = id;
         this.student = student;
         this.courseCode = courseCode;
@@ -45,11 +44,11 @@ public class Enrollment {
         this.id = id;
     }
 
-    public Account getStudent() {
+    public Student getStudent() {
         return student;
     }
 
-    public void setStudent(Account student) {
+    public void setStudent(Student student) {
         this.student = student;
     }
 
@@ -77,3 +76,4 @@ public class Enrollment {
         this.homeworks = enrollment.getHomework();
     }
 }
+

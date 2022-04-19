@@ -42,8 +42,8 @@ public class Course {
     @ToString.Exclude
     private Teacher teacher;
 
-    @ManyToMany(mappedBy = "courseCollection")
-    private Collection<Student> studentCollection;
+//    @ManyToMany(mappedBy = "courseCollection")
+//    private Collection<Student> studentCollection;
 
     public void updateCourse(Course course){
         this.startTime = course.getStartTime();
@@ -52,6 +52,6 @@ public class Course {
         this.courseCode = course.getCourseCode();
         this.description = course.getDescription();
         this.teacher = course.getTeacher();
-        this.studentCollection = course.getStudentCollection();
+//        this.studentCollection = course.getStudentCollection();
     }
 }
