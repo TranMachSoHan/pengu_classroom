@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "students")
-public class Student extends AccountDetails {
+public class Student extends Account {
 
     @Column(name = "average_mark", nullable = false)
     private float average_mark;

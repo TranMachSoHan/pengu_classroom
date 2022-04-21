@@ -1,7 +1,7 @@
 package rmit.repositories;
 
-import rmit.models.AccountDetails;
+import rmit.models.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AccountRepository extends JpaRepository<AccountDetails, Integer> {
+public interface AccountRepository extends JpaRepository<Account, Integer> {
 }

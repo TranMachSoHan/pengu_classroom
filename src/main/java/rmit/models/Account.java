@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class AccountDetails {
+public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -17,10 +17,10 @@ public abstract class AccountDetails {
 
     private String profile_picture;
 
-    public AccountDetails(){}
+    public Account(){}
 
 
-    public AccountDetails(int id, String user_name, String password, String profile_picture) {
+    public Account(int id, String user_name, String password, String profile_picture) {
         this.id = id;
         this.user_name = user_name;
         this.password = password;
@@ -36,7 +36,7 @@ public abstract class AccountDetails {
         return info;
     }
 
-    public void updateAccount(AccountDetails account){
+    public void updateAccount(Account account){
         this.id = account.getId();
         this.user_name = account.getUser_name();
         this.password = account.getPassword();

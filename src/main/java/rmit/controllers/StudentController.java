@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.exceptions.ResourceNotFoundException;
-import rmit.models.AccountDetails;
+import rmit.models.Account;
 import rmit.models.Student;
 import rmit.service.StudentService;
 
@@ -24,23 +24,23 @@ public class StudentController {
     }
 
     @GetMapping("students/{id}")
-    public ResponseEntity<AccountDetails> getStudentById(@PathVariable(value = "id") Integer accountId)
+    public ResponseEntity<Account> getStudentById(@PathVariable(value = "id") Integer accountId)
             throws ResourceNotFoundException {
         return ResponseEntity.ok().body(studentService.getStudentById(accountId));
     }
 
     @PostMapping("students")
-    public AccountDetails createStudent(@RequestBody Student student) {
+    public Account createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
     }
 
     @PutMapping("students/{id}")
-    public ResponseEntity<AccountDetails> updateStudent(@PathVariable(value = "id") Integer accountId,
-                                                         @RequestBody Student student) throws ResourceNotFoundException {
+    public ResponseEntity<Account> updateStudent(@PathVariable(value = "id") Integer accountId,
+                                                 @RequestBody Student student) throws ResourceNotFoundException {
         return ResponseEntity.ok(studentService.updateStudent(accountId, student));
     }
 
-    @DeleteMapping("accounts/{id}")
+    @DeleteMapping("students/{id}")
     public Map<String, Boolean> deleteStudent(@PathVariable(value = "id") Integer accountId)
             throws ResourceNotFoundException {
         studentService.deleteStudent(accountId);

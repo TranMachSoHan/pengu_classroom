@@ -14,7 +14,7 @@ public class CourseService {
     private CourseRepository courseRepository;
 
     public List<Course> getAllCourses(){
-        return courseRepository.findAll();
+        return this.courseRepository.findAll();
     }
 
     public Course getCourseById(int course_id)

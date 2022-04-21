@@ -3,9 +3,7 @@ package rmit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rmit.exceptions.ResourceNotFoundException;
-import rmit.models.AccountDetails;
 import rmit.models.Student;
-import rmit.repositories.AccountRepository;
 import rmit.repositories.StudentRepository;
 
 import java.util.List;
