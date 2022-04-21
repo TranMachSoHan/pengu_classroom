@@ -41,7 +41,7 @@ public class CourseController {
     //update course
     @PutMapping("courses/{id}")
     public ResponseEntity<Course> updateCourse(@PathVariable(value = "id") int courseId,
-        @RequestBody Course courseDetails) throws ResourceNotFoundException {
+                                               @RequestBody Course courseDetails) throws ResourceNotFoundException {
         return ResponseEntity.ok(courseService.updateCourse(courseId,courseDetails));
     }
 
