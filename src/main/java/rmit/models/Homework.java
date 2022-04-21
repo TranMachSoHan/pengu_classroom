@@ -15,9 +15,6 @@ public class Homework {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "courseCode", nullable = false)
-    private String courseCode;
-
     @Column(name = "titles", nullable = false)
     private String title;
 
@@ -48,10 +45,9 @@ public class Homework {
     @ToString.Exclude
     private Enrollment enrollment;
 
-    public Homework(int id, String courseCode, String title, float mark, String feedback,
+    public Homework(int id, String title, float mark, String feedback,
                     Boolean isSubmitted, Date dueDate, Submission submission, Enrollment enrollment) {
         this.id = id;
-        this.courseCode = courseCode;
         this.title = title;
         this.mark = mark;
         this.feedback = feedback;
@@ -69,14 +65,6 @@ public class Homework {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
     }
 
     public String getTitle() {
@@ -121,7 +109,6 @@ public class Homework {
 
     public void updateHomework(Homework homework) {
         this.id = homework.getId();
-        this.courseCode = homework.getCourseCode();
         this.title = homework.getTitle();
         this.mark = homework.getMark();
         this.feedback = homework.getFeedback();

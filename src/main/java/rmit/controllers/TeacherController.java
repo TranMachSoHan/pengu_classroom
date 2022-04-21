@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import rmit.repositories.TeacherRepository;
 import rmit.service.TeacherService;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,12 @@ public class TeacherController {
     public ResponseEntity<Teacher> updateTeacher(@PathVariable(value = "id") int teacher_id,
                                                @RequestBody Teacher teacherDetail) throws ResourceNotFoundException {
         return ResponseEntity.ok(teacherService.updateTeacher(teacher_id,teacherDetail));
+    }
+
+    @GetMapping("teacher/courses/{id}")
+    public ResponseEntity<Collection<Course>> getTeachingCourse(@PathVariable(value = "id") int teacher_id) throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(teacherService.getAllTeachingCourses(teacher_id));
     }
 
 }

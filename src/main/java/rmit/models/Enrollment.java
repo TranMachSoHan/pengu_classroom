@@ -1,6 +1,8 @@
 package rmit.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -19,9 +21,14 @@ public class Enrollment {
     @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL)
     private Collection<Homework> homeworks;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Student student;
 
+    @ManyToOne
+    @JoinColumn(name="course_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Course course;
 
     public Enrollment() {}
 

@@ -23,4 +23,12 @@ public class Teacher extends AccountDetails {
     public void updateTeacher(Teacher teacher){
         this.courses = teacher.getCourses();
         }
+
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
+    }
 }

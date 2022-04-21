@@ -1,5 +1,6 @@
 package rmit.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@JsonIgnoreProperties({"teacher"})
 @Table(name = "courses")
 public class Course {
     @Id
@@ -42,9 +44,6 @@ public class Course {
     @ToString.Exclude
     private Teacher teacher;
 
-//    @ManyToMany(mappedBy = "courseCollection")
-//    private Collection<Student> studentCollection;
-
     public void updateCourse(Course course){
         this.startTime = course.getStartTime();
         this.endTime = course.getEndTime();
@@ -54,4 +53,7 @@ public class Course {
         this.teacher = course.getTeacher();
 //        this.studentCollection = course.getStudentCollection();
     }
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private Collection<Enrollment> enrollments;
 }
