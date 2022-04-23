@@ -22,15 +22,14 @@ public class Student extends Account {
     private List<Enrollment> enrollmentList = new ArrayList<>();
 
 
-    public Student(int id, String user_name, String password, String profile_picture, float average_mark, String nickname, List<Enrollment> enrollmentList) {
-        super(id, user_name, password, profile_picture);
+    public Student(int id, String username, String password, String profile_picture, float average_mark, String nickname, List<Enrollment> enrollmentList) {
+        super(id, username, password, profile_picture, Role.STUDENT);
         this.average_mark = average_mark;
         this.nickname = nickname;
         this.enrollmentList = enrollmentList;
     }
 
     public Student() {
-
     }
 
 

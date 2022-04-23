@@ -17,8 +17,8 @@ public class Teacher extends Account {
     public Teacher() {
 
     }
-    public Teacher(int id, String user_name, String password, String profile_picture,Collection<Course> courses) {
-        super(id, user_name, password, profile_picture);
+    public Teacher(int id, String user_name, String password, String profile_picture, Collection<Course> courses) {
+        super(id, user_name, password, profile_picture, Role.TEACHER);
         this.courses=courses;
     }
 

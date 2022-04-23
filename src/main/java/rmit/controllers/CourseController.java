@@ -54,4 +54,10 @@ public class CourseController {
         response.put("deleted", Boolean.TRUE);
         return response;
     }
+
+    //get class code of current course
+    @GetMapping("courses/{id}/code")
+    public String getCurrentClassCode(@PathVariable(value = "id") int course_id) throws ResourceNotFoundException {
+        return courseService.getCourseById(course_id).getCourseCode();
+    }
 }
