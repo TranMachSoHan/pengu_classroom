@@ -1,37 +1,22 @@
 package rmit.models;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Data
-@Table(name = "event")
+@Table
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @Column(name = "dayOfTheWeek", nullable = false)
-    private String day;
-
-    @Column(name = "time", nullable = false)
-    private Date time;
-
-    public Event(){}
-    public Event(String day){
-        this.day = day;
+    public Long getId() {
+        return id;
     }
 
-    @ManyToOne
-    @JoinColumn(name="course_id")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Course course;
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.repositories.TeacherRepository;
+import rmit.service.TeacherService;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,35 +19,31 @@ import java.util.Map;
 public class TeacherController {
 
     @Autowired
-    private TeacherRepository teacherRepository;
+    private TeacherService teacherService;
 
     //get teacher
     @GetMapping("teachers")
     public List<Teacher> getAllTeachers(){
-        return this.teacherRepository.findAll();
+        return teacherService.getAllTeachers();
     }
 
     //get teacher by id
     @GetMapping("teachers/{id}")
     public ResponseEntity<Teacher> getTeacherById(@PathVariable(value = "id") int teacher_id)
             throws ResourceNotFoundException {
-        Teacher teacher = teacherRepository.findById(teacher_id)
-                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found for this id :: " + teacher_id));
-        return ResponseEntity.ok().body(teacher);
+        return ResponseEntity.ok().body(teacherService.getTeacherById(teacher_id));
     }
 
     //save teacher
     @PostMapping("teachers")
     public Teacher createTeacher(@RequestBody Teacher teacher){
-        return teacherRepository.save(teacher);
+        return teacherService.createTeacher(teacher);
     }
 
     //delete teacher
     @DeleteMapping("teachers/{id}")
     public Map<String, Boolean> deleteTeacher(@PathVariable(value = "id") int teacher_id) throws ResourceNotFoundException{
-        Teacher teacher = teacherRepository.findById(teacher_id)
-                .orElseThrow(()-> new ResourceNotFoundException("Teacher not found for this id :: " + teacher_id));
-        this.teacherRepository.delete(teacher);
+        teacherService.deleteTeacher(teacher_id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
@@ -55,10 +53,13 @@ public class TeacherController {
     @PutMapping("teacher/{id}")
     public ResponseEntity<Teacher> updateTeacher(@PathVariable(value = "id") int teacher_id,
                                                @RequestBody Teacher teacherDetail) throws ResourceNotFoundException {
-        Teacher teacher = teacherRepository.findById(teacher_id)
-                .orElseThrow(()-> new ResourceNotFoundException("Course not found for this id :: " + teacher_id));
-
-        teacher.updateTeacher(teacherDetail);
-        return ResponseEntity.ok(this.teacherRepository.save(teacher));
+        return ResponseEntity.ok(teacherService.updateTeacher(teacher_id,teacherDetail));
     }
+
+    @GetMapping("teacher/courses/{id}")
+    public ResponseEntity<Collection<Course>> getTeachingCourse(@PathVariable(value = "id") int teacher_id) throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(teacherService.getAllTeachingCourses(teacher_id));
+    }
+
 }

@@ -1,0 +1,86 @@
+package rmit.models;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.util.Collection;
+
+@Entity
+@Data
+@Table(name = "enrollments")
+public class Enrollment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    
+    @Column(name="courseCode", nullable = false)
+    private String courseCode;
+
+    @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL)
+    private Collection<Homework> homeworks;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name="course_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Course course;
+
+    public Enrollment() {}
+
+    public Enrollment(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public Enrollment(int id, Student student, String courseCode, Collection<Homework> homeworks) {
+        this.id = id;
+        this.student = student;
+        this.courseCode = courseCode;
+        this.homeworks = homeworks;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public Collection<Homework> getHomework() {
+        return homeworks;
+    }
+
+
+    public void setHomeworks(Collection<Homework> homeworks) {
+        this.homeworks = homeworks;
+    }
+
+    public void updateEnrollment(Enrollment enrollment) {
+        this.id = enrollment.getId();
+        this.student = enrollment.getStudent();
+        this.courseCode = enrollment.getCourseCode();
+        this.homeworks = enrollment.getHomework();
+    }
+}
+
