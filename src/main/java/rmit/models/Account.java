@@ -5,40 +5,45 @@ import org.json.JSONObject;
 
 import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String user_name;
+    private String username;
 
     private String password;
 
     private String profile_picture;
 
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
     public Account(){}
 
 
-    public Account(int id, String user_name, String password, String profile_picture) {
+    public Account(int id, String username, String password, String profile_picture, Role role) {
         this.id = id;
-        this.user_name = user_name;
+        this.username = username;
         this.password = password;
         this.profile_picture = profile_picture;
+        this.role = role;
     }
 
     @Override
     public String toString(){
         String info = "";
         JSONObject jsonInfo = new JSONObject();
-        jsonInfo.put("user_name",this.user_name );
+        jsonInfo.put("user_name",this.username );
         info = jsonInfo.toString();
         return info;
     }
 
     public void updateAccount(Account account){
         this.id = account.getId();
-        this.user_name = account.getUser_name();
+        this.username = account.getUsername();
         this.password = account.getPassword();
         this.profile_picture = account.getProfile_picture();
     }
@@ -51,12 +56,12 @@ public abstract class Account {
         this.id = id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUser_name(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -75,5 +80,11 @@ public abstract class Account {
         this.profile_picture = profile_picture;
     }
 
+    public Role getRole() {
+        return role;
+    }
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

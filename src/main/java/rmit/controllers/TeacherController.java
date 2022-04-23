@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.repositories.TeacherRepository;
+import rmit.service.CourseService;
 import rmit.service.TeacherService;
 
 import java.util.Collection;
@@ -56,10 +57,25 @@ public class TeacherController {
         return ResponseEntity.ok(teacherService.updateTeacher(teacher_id,teacherDetail));
     }
 
-    @GetMapping("teacher/courses/{id}")
+    //get all courses that are currently taught by teacher
+    @GetMapping("teacher/{id}/courses")
     public ResponseEntity<Collection<Course>> getTeachingCourse(@PathVariable(value = "id") int teacher_id) throws ResourceNotFoundException {
 
         return ResponseEntity.ok().body(teacherService.getAllTeachingCourses(teacher_id));
     }
+
+    //create new course and assign to current teacher
+    @PostMapping("teacher/{id}/add_course")
+    public Course createNewCourse(@PathVariable(value = "id") int teacher_id,@RequestBody Course course)
+            throws ResourceNotFoundException {
+        Teacher teacher = teacherService.getTeacherById(teacher_id);
+        teacher.getCourses().add(course);
+        course.setTeacher(teacher);
+        return course;
+    }
+
+
+
+
 
 }

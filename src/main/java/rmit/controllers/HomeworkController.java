@@ -54,4 +54,16 @@ public class HomeworkController {
         response.put("deleted", Boolean.TRUE);
         return response;
     }
+
+    //publish graded homework
+    @PostMapping("homeworks/{id}")
+    public Homework publishGradedHomework(@PathVariable(value="id") int homeworkId, float mark) throws ResourceNotFoundException {
+        Homework homework = homeworkRepository.findById(homeworkId)
+                .orElseThrow(()-> new ResourceNotFoundException("Course not found for this id :: " + homeworkId));
+        homework.setMark(mark);
+        return homework;
+    }
+
+
+
 }
