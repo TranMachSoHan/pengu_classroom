@@ -1,11 +1,18 @@
 package rmit.controllers;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.ui.Model;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Course;
+import rmit.models.Enrollment;
+import rmit.models.Student;
 import rmit.models.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rmit.repositories.CourseRepository;
+import rmit.repositories.HomeworkRepository;
 import rmit.repositories.TeacherRepository;
 import rmit.service.CourseService;
 import rmit.service.TeacherService;
@@ -22,9 +29,12 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private CourseService courseService;
+
     //get teacher
     @GetMapping("teachers")
-    public List<Teacher> getAllTeachers(){
+    public List<Teacher> getAllTeachers() {
         return teacherService.getAllTeachers();
     }
 
@@ -37,13 +47,13 @@ public class TeacherController {
 
     //save teacher
     @PostMapping("teachers")
-    public Teacher createTeacher(@RequestBody Teacher teacher){
+    public Teacher createTeacher(@RequestBody Teacher teacher) {
         return teacherService.createTeacher(teacher);
     }
 
     //delete teacher
     @DeleteMapping("teachers/{id}")
-    public Map<String, Boolean> deleteTeacher(@PathVariable(value = "id") int teacher_id) throws ResourceNotFoundException{
+    public Map<String, Boolean> deleteTeacher(@PathVariable(value = "id") int teacher_id) throws ResourceNotFoundException {
         teacherService.deleteTeacher(teacher_id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
@@ -51,22 +61,22 @@ public class TeacherController {
     }
 
     //update teacher
-    @PutMapping("teacher/{id}")
+    @PutMapping("teachers/{id}")
     public ResponseEntity<Teacher> updateTeacher(@PathVariable(value = "id") int teacher_id,
-                                               @RequestBody Teacher teacherDetail) throws ResourceNotFoundException {
-        return ResponseEntity.ok(teacherService.updateTeacher(teacher_id,teacherDetail));
+                                                 @RequestBody Teacher teacherDetail) throws ResourceNotFoundException {
+        return ResponseEntity.ok(teacherService.updateTeacher(teacher_id, teacherDetail));
     }
 
     //get all courses that are currently taught by teacher
-    @GetMapping("teacher/{id}/courses")
+    @GetMapping("teachers/{id}/courses")
     public ResponseEntity<Collection<Course>> getTeachingCourse(@PathVariable(value = "id") int teacher_id) throws ResourceNotFoundException {
 
         return ResponseEntity.ok().body(teacherService.getAllTeachingCourses(teacher_id));
     }
 
     //create new course and assign to current teacher
-    @PostMapping("teacher/{id}/add_course")
-    public Course createNewCourse(@PathVariable(value = "id") int teacher_id,@RequestBody Course course)
+    @PostMapping("teachers/{id}/courses/add_course")
+    public Course createNewCourse(@PathVariable(value = "id") int teacher_id, @RequestBody Course course)
             throws ResourceNotFoundException {
         Teacher teacher = teacherService.getTeacherById(teacher_id);
         teacher.getCourses().add(course);
@@ -74,8 +84,20 @@ public class TeacherController {
         return course;
     }
 
-
-
-
-
+    //summarize student mark in course
+    @GetMapping("teachers/courses/{course_id}/summary")
+    public JSONArray summarizeStudentMark(@PathVariable(value = "course_id") int courseId) throws ResourceNotFoundException {
+        Course course = courseService.getCourseById(courseId);
+        JSONArray jsonArray = new JSONArray();
+        Collection<Enrollment> enrollmentCollection = course.getEnrollments();
+        for (Enrollment enrollment : enrollmentCollection) {
+            Student student = enrollment.getStudent();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("nickname", student.getNickname());
+            jsonObject.put("id", student.getId());
+            jsonObject.put("homeworkList", enrollment.getHomework());
+            jsonArray.put(jsonObject);
+        }
+        return jsonArray;
+    }
 }
