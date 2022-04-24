@@ -65,6 +65,7 @@ public class HomeworkController {
         Homework homework = homeworkRepository.findById(homeworkId)
                 .orElseThrow(()-> new ResourceNotFoundException("Homework not found for this id :: " + homeworkId));
         homework.setMark(mark);
+//        this.homeworkRepository.save(homework);
         return homework;
     }
 
@@ -92,8 +93,6 @@ public class HomeworkController {
         homeworkRepository.save(homework);
         return "redirect:/homeworks";
     }
-
-
 
 
 

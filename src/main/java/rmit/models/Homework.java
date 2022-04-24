@@ -128,6 +128,9 @@ public class Homework {
         this.description = description;
     }
 
+    //- Description : Word file
+//- submission: Word file
+
     public Submission getSubmission() {
         return submission;
     }
@@ -143,9 +146,4 @@ public class Homework {
     public void setEnrollment(Enrollment enrollment) {
         this.enrollment = enrollment;
     }
-
-    //- Description : Word file
-//- submission: Word file
-
-
 }
