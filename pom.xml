@@ -92,6 +92,7 @@
                 <version>3.1.0</version>
             </plugin>
             <plugin>
+
                 <!-- Building an executable jar -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
