@@ -16,7 +16,9 @@ public class App implements CommandLineRunner {
     @Autowired
     DataSource dataSource;
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(App.class, args
+
+        );
     }
 
     @Override
