@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @Entity
 @Data
-@JsonIgnoreProperties({"homeworks","students"})
+@JsonIgnoreProperties({"homeworks","student","course"})
 @Table(name = "enrollments")
 public class Enrollment {
     @Id
