@@ -3,6 +3,7 @@ package rmit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Course;
 import rmit.models.Student;
@@ -18,10 +19,12 @@ public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
 
+    @Transactional
     public List<Teacher> getAllTeachers(){
         return teacherRepository.findAll();
     }
 
+    @Transactional
     public Teacher getTeacherById(int accountId) throws ResourceNotFoundException {
         return teacherRepository.findById(accountId)
                 .orElseThrow(() -> new ResourceNotFoundException("Teacher not found for this id :: " + accountId));

@@ -1,5 +1,6 @@
 package rmit.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -10,6 +11,8 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "homeworks")
+@JsonIgnoreProperties({"submission"})
+
 public class Homework {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +20,9 @@ public class Homework {
 
     @Column(name = "titles", nullable = false)
     private String title;
+
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @Column(name = "marks", nullable = false)
     private float mark;
@@ -45,10 +51,11 @@ public class Homework {
     @ToString.Exclude
     private Enrollment enrollment;
 
-    public Homework(int id, String title, float mark, String feedback,
+    public Homework(int id, String title, String description, float mark, String feedback,
                     Boolean isSubmitted, Date dueDate, Submission submission, Enrollment enrollment) {
         this.id = id;
         this.title = title;
+        this.description = description;
         this.mark = mark;
         this.feedback = feedback;
         this.isSubmitted = isSubmitted;
@@ -116,8 +123,30 @@ public class Homework {
         this.dueDate = homework.getDueDate();
     }
 
-//- Description : Word file
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    //- Description : Word file
 //- submission: Word file
 
+    public Submission getSubmission() {
+        return submission;
+    }
 
+    public void setSubmission(Submission submission) {
+        this.submission = submission;
+    }
+
+    public Enrollment getEnrollment() {
+        return enrollment;
+    }
+
+    public void setEnrollment(Enrollment enrollment) {
+        this.enrollment = enrollment;
+    }
 }
