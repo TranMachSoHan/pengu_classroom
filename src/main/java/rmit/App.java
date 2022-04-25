@@ -23,7 +23,7 @@ public class App implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String script = "E:\\CODE-UniWork\\Enterprise\\GroupProject\\src\\main\\resources\\createAccountPgAdminScript.sql";
+        String script = "src/main/resources/createAccountPgAdminScript.sql";
         ScriptRunner scriptRunner = new ScriptRunner(dataSource.getConnection());
         scriptRunner.runScript(new BufferedReader(new FileReader(script)));
     }
