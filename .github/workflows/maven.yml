@@ -30,4 +30,4 @@ jobs:
        username: ${{ secrets.DOCKER_HUB_USERNAME }}
        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
        repository: maklisa2000/pengu_classroom
-       tags: ${{github.run_number}}
+       tags: latest
