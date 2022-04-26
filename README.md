@@ -13,3 +13,4 @@
     * REPOSITORY: maklisa2000/pengu_classroom
     * TAG: latest
   * Run docker images: ``docker run -d -p 8081:8081 -t maklisa2000/pengu_classroom:latest``
+  * Check if container maklisa2000/pengu_classroom is running: 
