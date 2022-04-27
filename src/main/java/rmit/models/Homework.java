@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "homeworks")
-@JsonIgnoreProperties({"submission"})
+@JsonIgnoreProperties({"enrollment"})
 
 public class Homework {
     @Id

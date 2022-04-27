@@ -14,6 +14,7 @@ import rmit.models.Homework;
 import rmit.models.Submission;
 import rmit.repositories.HomeworkRepository;
 import rmit.repositories.SubmissionRepository;
+import rmit.service.HomeworkService;
 import rmit.service.SubmissionService;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class SubmissionController {
     private SubmissionService submissionService;
 
     @Autowired
-    private HomeworkRepository homeworkRepository;
+    private HomeworkService homeworkService;
 
     @GetMapping("/submissions")
     public ResponseEntity<List<ResponseFile>> getListFiles() {
@@ -40,7 +41,7 @@ public class SubmissionController {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/api/v1/submissions/")
-                    .path(submission.getId().toString())
+                    .path(submission.getId())
                     .toUriString();
 
             return new ResponseFile(
@@ -48,7 +49,7 @@ public class SubmissionController {
                     fileDownloadUri,
                     submission.getType(),
                     submission.getData().length,
-                    submission.getHomework());
+                    submission.getHomework().getId());
         }).collect(Collectors.toList());
 
         return ResponseEntity.status(HttpStatus.OK).body(submissions);
@@ -66,12 +67,10 @@ public class SubmissionController {
     @PostMapping("homeworks/{id}/upload")
     public ResponseEntity<ResponseMessage> uploadSubmission(@PathVariable(value = "id") int homeworkId, @RequestParam("file") MultipartFile file)
         throws ResourceNotFoundException {
-        Homework homework = homeworkRepository.findById(homeworkId)
-                .orElseThrow(() -> new ResourceNotFoundException("Homework not found for this id :: " + homeworkId));
+        Homework homework = homeworkService.getHomeworkById(homeworkId);
         String message = "";
         try {
             submissionService.saveSubmission(file, homework);
-
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {

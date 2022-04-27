@@ -9,13 +9,13 @@ public class ResponseFile {
     private String url;
     private String type;
     private long size;
-    private Homework homework;
+    private int homeworkId;
 
-    public ResponseFile(String name, String url, String type, long size, Homework homework) {
+    public ResponseFile(String name, String url, String type, long size, int homeworkId) {
         this.name = name;
         this.url = url;
         this.type = type;
         this.size = size;
-        this.homework = homework;
+        this.homeworkId = homeworkId;
     }
 }

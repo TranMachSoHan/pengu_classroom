@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Homework;
 import rmit.models.Submission;
+import rmit.repositories.HomeworkRepository;
 import rmit.repositories.SubmissionRepository;
 
 import java.util.stream.Stream;
@@ -15,6 +16,8 @@ import java.util.stream.Stream;
 public class SubmissionService {
     @Autowired
     private SubmissionRepository submissionRepository;
+    @Autowired
+    private HomeworkRepository homeworkRepository;
 
     public Stream<Submission> getAllSubmission(){
         return submissionRepository.findAll().stream();
@@ -28,6 +31,8 @@ public class SubmissionService {
     public Submission saveSubmission(MultipartFile multipartFile, Homework homework) throws Exception {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         Submission submission = new Submission(fileName, multipartFile.getContentType(), multipartFile.getBytes(),homework);
+        homework.setSubmission(submission);
+        submission.setHomework(homework);
         return submissionRepository.save(submission);
 
 

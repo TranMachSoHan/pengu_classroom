@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Enrollment;
 import rmit.repositories.EnrollmentRepository;
+import rmit.service.EnrollmentService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,43 +16,34 @@ import java.util.Map;
 @RequestMapping("/api/v1/")
 public class EnrollmentController {
     @Autowired
-    private EnrollmentRepository enrollmentRepository;
+    private EnrollmentService enrollmentService;
 
     @GetMapping("enrollments")
     public List<Enrollment> getAllEnrollment() {
-        return enrollmentRepository.findAll();
+        return enrollmentService.getAllEnrollments();
     }
 
     @GetMapping("enrollments/{id}")
     public ResponseEntity<Enrollment> getEnrollmentById(@PathVariable(value = "id") Integer enrollmentId)
             throws ResourceNotFoundException {
-        Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Enrollment not found for this id :: " + enrollmentId));
-        return ResponseEntity.ok().body(enrollment);
+        return ResponseEntity.ok().body(enrollmentService.getEnrollmentById(enrollmentId));
     }
 
     @PostMapping("enrollments")
     public Enrollment createEnrollment( @RequestBody Enrollment enrollment) {
-        return enrollmentRepository.save(enrollment);
+        return enrollmentService.createEnrollment(enrollment);
     }
 
     @PutMapping("enrollments/{id}")
     public ResponseEntity<Enrollment> updateEnrollment(@PathVariable(value = "id") Integer enrollmentId,
                                                   @RequestBody Enrollment enrollmentDetails) throws ResourceNotFoundException {
-         Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Enrollment not found for this id :: " + enrollmentId));
-
-        enrollment.updateEnrollment(enrollmentDetails);
-        return ResponseEntity.ok(this.enrollmentRepository.save(enrollment));
+        return ResponseEntity.ok(this.enrollmentService.updateEnrollment(enrollmentId,enrollmentDetails));
     }
 
     @DeleteMapping("enrollments/{id}")
     public Map<String, Boolean> deleteEnrollment(@PathVariable(value = "id") Integer enrollmentId)
             throws ResourceNotFoundException {
-        Enrollment enrollment  = enrollmentRepository.findById(enrollmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Enrollment not found for this id :: " + enrollmentId));
-
-        enrollmentRepository.delete(enrollment);
+        enrollmentService.deleteEnrollment(enrollmentId);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
