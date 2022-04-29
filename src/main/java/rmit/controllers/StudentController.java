@@ -1,13 +1,15 @@
 package rmit.controllers;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.exceptions.ResourceNotFoundException;
-import rmit.models.Account;
-import rmit.models.Student;
-import rmit.service.StudentService;
+import rmit.models.*;
+import rmit.service.*;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import java.util.Map;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    private CourseService courseService;
 
     @GetMapping("students")
     public List<Student> getAllStudents() {
@@ -49,4 +52,22 @@ public class StudentController {
         return response;
     }
 
+    @GetMapping("students/{student_id}/enrollments/courses/events/")
+    public JSONArray getEventByStudent(@PathVariable(value = "id") Integer accountId)
+            throws ResourceNotFoundException {
+        Collection<Enrollment> enroll = studentService.getEnrollmentByStudent(accountId);
+        JSONArray jsonArray = new JSONArray();
+        for(Enrollment e : enroll){
+            int courseId = e.getId();
+            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
+            for(Event ee : events) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("startTime", ee.getStartTime());
+                jsonObject.put("endTime", ee.getEndTime());
+                jsonObject.put("day", ee.getDay());
+                jsonArray.put(jsonObject);
+            }
+        }
+        return jsonArray;
+    }
 }
