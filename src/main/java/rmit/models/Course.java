@@ -38,6 +38,14 @@ public class Course {
         this.title = title;
     }
 
+    public Collection<Event> getEvent() {
+        return events;
+    }
+
+    public void setEvent(Collection<Event> events) {
+        this.events = events;
+    }
+
     @ManyToOne
     @JoinColumn(name="teacher_id")
     @EqualsAndHashCode.Exclude
@@ -56,4 +64,7 @@ public class Course {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private Collection<Enrollment> enrollments;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private Collection<Event> events;
 }

@@ -73,7 +73,6 @@ public class Enrollment {
         return homeworks;
     }
 
-
     public void setHomeworks(Collection<Homework> homeworks) {
         this.homeworks = homeworks;
     }
