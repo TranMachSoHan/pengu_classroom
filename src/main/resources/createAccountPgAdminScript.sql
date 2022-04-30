@@ -54,10 +54,10 @@ INSERT INTO public.enrollments(
 --	id, data, name, type)
 --	VALUES (51, 2, 'Sub2', 'word');
 
-INSERT INTO public.homeworks(
-	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id)
-	VALUES (31, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 11);
-
-INSERT INTO public.homeworks(
-	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id)
-	VALUES (30, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 10);
+--INSERT INTO public.homeworks(
+--	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id)
+--	VALUES (31, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 11);
+--
+--INSERT INTO public.homeworks(
+--	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id)
+--	VALUES (30, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 10);

@@ -22,7 +22,7 @@ public class HomeworkController {
 
     @GetMapping("homeworks")
     public List<Homework> getAllHomework(){
-        return this.homeworkService.getAllHomeworks();
+        return homeworkService.getAllHomeworks();
     }
 
     @GetMapping("homeworks/{id}")

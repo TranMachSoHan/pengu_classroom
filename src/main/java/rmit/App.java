@@ -12,17 +12,15 @@ import java.io.FileReader;
 import java.sql.DriverManager;
 
 @SpringBootApplication
-public class App implements CommandLineRunner {
-    @Autowired
-    DataSource dataSource;
+public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        String script = "E:\\CODE-UniWork\\Enterprise\\GroupProject\\src\\main\\resources\\createAccountPgAdminScript.sql";
-        ScriptRunner scriptRunner = new ScriptRunner(dataSource.getConnection());
-        scriptRunner.runScript(new BufferedReader(new FileReader(script)));
-    }
+//    @Override
+//    public void run(String... args) throws Exception {
+//        String script = System.getProperty("user.dir") + "\\src\\main\\resources\\createAccountPgAdminScript.sql";
+//        ScriptRunner scriptRunner = new ScriptRunner(dataSource.getConnection());
+//        scriptRunner.runScript(new BufferedReader(new FileReader(script)));
+//    }
 }
