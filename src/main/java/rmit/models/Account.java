@@ -48,6 +48,8 @@ public abstract class Account {
         this.profile_picture = account.getProfile_picture();
     }
 
+
+
     public int getId() {
         return id;
     }

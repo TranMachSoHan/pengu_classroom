@@ -41,6 +41,15 @@ public class AccountController {
         return ResponseEntity.ok(accountService.updateAccount(accountId,accountDetails));
     }
 
+    @PutMapping("account_password/{id}")
+    public ResponseEntity<Account> changePassword(@PathVariable(value = "id") Integer accountId,
+                                                 @RequestBody String password) throws ResourceNotFoundException {
+        return ResponseEntity.ok(accountService.changePassword(accountId, password));
+    }
+
+    @PostMapping("signup")
+    public Account signUp( @RequestBody Account account) {return accountService.createAccount(account);}
+
     @DeleteMapping("accounts/{id}")
     public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") Integer accountId)
             throws ResourceNotFoundException {
