@@ -30,10 +30,8 @@ public class AccountController {
         return ResponseEntity.ok().body(accountService.getAccountById(accountId));
     }
 
-    @PostMapping("accounts")
-    public Account createAccount( @RequestBody Account account) {
-        return accountService.createAccount(account);
-    }
+    @PostMapping("signup")
+    public Account signUp( @RequestBody Account account) {return accountService.createAccount(account);}
 
     @PutMapping("accounts/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable(value = "id") Integer accountId,
@@ -41,11 +39,21 @@ public class AccountController {
         return ResponseEntity.ok(accountService.updateAccount(accountId,accountDetails));
     }
 
+    @PutMapping("change_account_password/{id}")
+    public ResponseEntity<Account> changePassword(@PathVariable(value = "id") Integer accountId,
+                                                 @RequestBody String password) throws ResourceNotFoundException {
+        return ResponseEntity.ok(accountService.changePassword(accountId, password));
+    }
+
+    @PutMapping("change_profile_picture/{id}")
+    public ResponseEntity<Account> changeProfilePicture(@PathVariable(value = "id") Integer accountId,
+                                                  @RequestBody String profile_picture) throws ResourceNotFoundException {
+        return ResponseEntity.ok(accountService.changeProfilePicture(accountId, profile_picture));
+    }
     @DeleteMapping("accounts/{id}")
     public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") Integer accountId)
             throws ResourceNotFoundException {
         accountService.deleteAccount(accountId);
-
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;

@@ -4,10 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.ui.Model;
 import rmit.exceptions.ResourceNotFoundException;
-import rmit.models.Course;
-import rmit.models.Enrollment;
-import rmit.models.Student;
-import rmit.models.Teacher;
+import rmit.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -97,6 +94,25 @@ public class TeacherController {
             jsonObject.put("id", student.getId());
             jsonObject.put("homeworkList", enrollment.getHomework());
             jsonArray.put(jsonObject);
+        }
+        return jsonArray;
+    }
+
+    @GetMapping("teachers/get_timetable/{teacher_id}")
+    public JSONArray getTeacherTimetable(@PathVariable(value = "id") Integer accountId)
+            throws ResourceNotFoundException {
+        Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
+        JSONArray jsonArray = new JSONArray();
+        for(Course c : courses){ //EXAMPLE: 3 ENROLL -> 3 COURSE
+            int courseId = c.getId(); // REQUIRE THE COURSE ID
+            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
+            for(Event ee : events) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("startTime", ee.getStartTime());
+                jsonObject.put("endTime", ee.getEndTime());
+                jsonObject.put("day", ee.getDay());
+                jsonArray.put(jsonObject);
+            }
         }
         return jsonArray;
     }
