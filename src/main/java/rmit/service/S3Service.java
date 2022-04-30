@@ -18,6 +18,9 @@ public class S3Service implements FileServiceImpl{
     @Value("${amazon.s3.bucketName}")
     private String bucketName;
 
+    @Value("${amazon.s3.endpoint}")
+    private String endPoint;
+
     private final AmazonS3 s3;
 
     public S3Service(AmazonS3 s3) {
@@ -27,16 +30,24 @@ public class S3Service implements FileServiceImpl{
     @Override
     public String saveFile(MultipartFile multipartFile) {
         String filename = generateName(multipartFile);
+        String extension = multipartFile.getOriginalFilename().split("\\.")[1];
         try {
             File convertedFile = convertMultipartToFile(multipartFile);
-            PutObjectRequest putObjectRequest =  new PutObjectRequest(bucketName,filename,convertedFile)
-                    .withCannedAcl(CannedAccessControlList.PublicRead);
+            PutObjectRequest putObjectRequest;
+            if (extension.equals("pdf")) {
+                putObjectRequest =  new PutObjectRequest(bucketName, "submission/" + filename, convertedFile)
+                        .withCannedAcl(CannedAccessControlList.PublicRead);
+            } else {
+                putObjectRequest = new PutObjectRequest(bucketName, "profile-picture/" + filename, convertedFile)
+                        .withCannedAcl(CannedAccessControlList.PublicRead);
+            }
             s3.putObject(putObjectRequest);
             return "Successfully upload the file " + filename;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public byte[] downloadFile(String filename) {

@@ -17,10 +17,4 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-//    @Override
-//    public void run(String... args) throws Exception {
-//        String script = System.getProperty("user.dir") + "\\src\\main\\resources\\createAccountPgAdminScript.sql";
-//        ScriptRunner scriptRunner = new ScriptRunner(dataSource.getConnection());
-//        scriptRunner.runScript(new BufferedReader(new FileReader(script)));
-//    }
 }

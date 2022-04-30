@@ -35,7 +35,7 @@ public class S3Controller {
         return s3Service.deleteFile(filename);
     }
 
-    @GetMapping("allfiles")
+    @GetMapping("allFiles")
     public List<String> getAllFiles() {
         return s3Service.listAllFiles();
     }
