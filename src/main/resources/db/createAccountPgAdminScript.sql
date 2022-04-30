@@ -1,6 +1,6 @@
-	INSERT INTO public.account(
-	id, password, profile_picture,role, username)
-	VALUES (1, '123', '123','TEACHER','teacher1');
+INSERT INTO public.account(
+id, password, profile_picture,role, username)
+VALUES (1, '123', '123','TEACHER','teacher1');
 
 INSERT INTO public.account(
 	id, password, profile_picture, role, username)
@@ -61,20 +61,3 @@ INSERT INTO public.enrollments(
 --INSERT INTO public.homeworks(
 --	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id)
 --	VALUES (30, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 10);
-
---
--- INSERT INTO public.submission(
--- 	id, data, name, type)
--- 	VALUES (50, 1, 'Sub1', 'word');
---
--- INSERT INTO public.submission(
--- 	id, data, name, type)
--- 	VALUES (51, 2, 'Sub2', 'word');
-
--- INSERT INTO public.homeworks(
--- 	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id, submission_id)
--- 	VALUES (31, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 11, 51);
---
--- INSERT INTO public.homeworks(
--- 	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id, submission_id)
--- 	VALUES (30, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 10, 50);
