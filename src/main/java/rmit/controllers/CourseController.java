@@ -8,12 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.repositories.CourseRepository;
 import rmit.service.CourseService;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@EnableSwagger2
 @RequestMapping("/api/v1/")
 public class CourseController {
 
