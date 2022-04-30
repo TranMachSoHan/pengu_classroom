@@ -52,13 +52,13 @@ public class StudentController {
         return response;
     }
 
-    @GetMapping("students/{student_id}/enrollments/courses/events/")
-    public JSONArray getEventByStudent(@PathVariable(value = "id") Integer accountId)
+    @GetMapping("students/get_timetable/{student_id}")
+    public JSONArray getStudentTimetable(@PathVariable(value = "id") Integer accountId)
             throws ResourceNotFoundException {
         Collection<Enrollment> enroll = studentService.getEnrollmentByStudent(accountId);
         JSONArray jsonArray = new JSONArray();
-        for(Enrollment e : enroll){
-            int courseId = e.getId();
+        for(Enrollment e : enroll){ //EXAMPLE: 3 ENROLL -> 3 COURSE
+            int courseId = e.getCourse().getId(); // REQUIRE THE COURSE ID FROM ENROLLMENT
             Collection<Event> events = courseService.getAllEventByCourseId(courseId);
             for(Event ee : events) {
                 JSONObject jsonObject = new JSONObject();

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table
+@Table(name = "events")
 public class Event {
     @Id
     @Column(name = "id", nullable = false)
@@ -21,6 +21,9 @@ public class Event {
 
     @Column(name = "day", nullable = false)
     private String day;
+
+    @Column(name = "timezone", nullable = false)
+    private timezone zone;
 
     public int getId() {
         return id;
@@ -49,6 +52,24 @@ public class Event {
 
     public void setDay(){
         this.day = day;
+    }
+
+    public enum timezone{
+        I,
+        II,
+        III,
+        IV,
+        V,
+        VI,
+        VII;
+    }
+
+    public timezone getZone(){
+        return zone;
+    }
+
+    public void setTimeZone(timezone zone){
+        this.zone = zone;
     }
 
     @ManyToOne

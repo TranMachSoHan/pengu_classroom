@@ -22,6 +22,13 @@ public class AccountService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + accountId));
     }
 
+//    public Account getAccountByUsername(String username) throws ResourceNotFoundException{
+//        Account account = accountRepository.findByUsername(username);
+//        if (account.getRole().equals("students")){
+//            return account +
+//        }
+//    }
+
     public Account createAccount( Account account) {
         return accountRepository.save(account);
     }
@@ -38,8 +45,16 @@ public class AccountService {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new ResourceNotFoundException("account not found for this id :: " + accountId));
         account.setPassword(password);
-        final Account passwordChanged = accountRepository.save(account);
-        return passwordChanged;
+        final Account updatedAccount = accountRepository.save(account);
+        return updatedAccount;
+    }
+
+    public Account changeProfilePicture(Integer accountId, String profile_picture)throws ResourceNotFoundException {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new ResourceNotFoundException("account not found for this id :: " + accountId));
+        account.setProfile_picture(profile_picture);
+        final Account updatedAccount = accountRepository.save(account);
+        return updatedAccount;
     }
 
     public void deleteAccount(Integer accountId)
