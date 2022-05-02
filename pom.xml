@@ -13,7 +13,9 @@
 
     <properties>
         <java.version>17</java.version>
+        <java.version>8</java.version>
     </properties>
+    <packaging>jar</packaging>
 
     <groupId>sadi</groupId>
     <artifactId>hellospringannotation</artifactId>
@@ -87,7 +89,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
-            <version>1.11.133</version>
+            <version>1.12.206</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
