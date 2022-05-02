@@ -10,11 +10,14 @@
         <version>2.4.5</version>
         <relativePath/> <!-- lookup parent from rmit.repository -->
     </parent>
-
+    <packaging>jar</packaging>
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>17</java.version>
         <java.version>8</java.version>
     </properties>
+
     <packaging>jar</packaging>
 
     <groupId>sadi</groupId>
@@ -89,7 +92,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
-            <version>1.12.206</version>
+            <version>1.11.133</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -108,6 +111,24 @@
                     <source>17</source>
                     <target>17</target>
                     <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!-- Building an executable jar -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- give full qualified name of your main class-->
+                            <mainClass>rmit.App</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
