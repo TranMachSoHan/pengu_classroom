@@ -74,7 +74,5 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name="course_id")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
     private Course course;
 }
