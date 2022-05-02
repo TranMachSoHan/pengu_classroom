@@ -8,9 +8,7 @@ import rmit.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rmit.repositories.CourseRepository;
-import rmit.repositories.HomeworkRepository;
-import rmit.repositories.TeacherRepository;
+import rmit.repositories.*;
 import rmit.service.CourseService;
 import rmit.service.TeacherService;
 
@@ -103,15 +101,18 @@ public class TeacherController {
             throws ResourceNotFoundException {
         Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
         JSONArray jsonArray = new JSONArray();
+
         for(Course c : courses){ //EXAMPLE: 3 ENROLL -> 3 COURSE
+            JSONObject jsonObjectCourse = new JSONObject();
             int courseId = c.getId(); // REQUIRE THE COURSE ID
             Collection<Event> events = courseService.getAllEventByCourseId(courseId);
+
             for(Event ee : events) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("startTime", ee.getStartTime());
-                jsonObject.put("endTime", ee.getEndTime());
-                jsonObject.put("day", ee.getDay());
-                jsonArray.put(jsonObject);
+                JSONObject jsonObjectEvent = new JSONObject();
+                jsonObjectEvent.put("course_name: ", c.getTitle());
+                jsonObjectEvent.put("day: ", ee.getDay());
+                jsonObjectEvent.put("time_zone: ", ee.getZone());
+                jsonArray.put(jsonObjectEvent);
             }
         }
         return jsonArray;

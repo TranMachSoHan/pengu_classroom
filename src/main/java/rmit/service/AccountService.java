@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Account;
+import rmit.models.Role;
 import rmit.repositories.AccountRepository;
 
 import java.util.List;
@@ -22,12 +23,11 @@ public class AccountService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + accountId));
     }
 
-//    public Account getAccountByUsername(String username) throws ResourceNotFoundException{
-//        Account account = accountRepository.findByUsername(username);
-//        if (account.getRole().equals("students")){
-//            return account +
-//        }
-//    }
+
+    public Account getAccountByUsername(String username) throws ResourceNotFoundException{
+        return accountRepository.findBy(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + username));
+    }
 
     public Account createAccount( Account account) {
         return accountRepository.save(account);

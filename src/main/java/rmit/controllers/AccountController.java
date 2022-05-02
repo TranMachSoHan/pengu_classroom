@@ -30,13 +30,12 @@ public class AccountController {
         return ResponseEntity.ok().body(accountService.getAccountById(accountId));
     }
 
-    @GetMapping("login/{username, password}")
+    @GetMapping("accounts/login/{username, password}")
     public ResponseEntity<Account>  getAccountByUsername(@PathVariable(value = "username") String username, String password) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(accountService.getAccountByUsername(username));
-
     }
 
-    @PostMapping("signup")
+    @PostMapping("accounts/signup")
     public Account signUp( @RequestBody Account account) {return accountService.createAccount(account);}
 
     @PutMapping("accounts/{id}")
