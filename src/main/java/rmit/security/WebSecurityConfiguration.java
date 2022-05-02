@@ -61,3 +61,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic();
     }
 }
+
