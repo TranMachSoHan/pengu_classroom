@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
+    branches: [ workflow_main ]
   pull_request:
-    branches: [ main ]
+    branches: [ workflow_main ]
 
 jobs:
   build:
@@ -24,10 +24,10 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Publish to Docker Hub
-      uses: docker/build-push-action@v1
-      with:
-       username: ${{ secrets.DOCKER_HUB_USERNAME }}
-       password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-       repository: maklisa2000/pengu_classroom
-       tags: latest
+#    - name: Publish to Docker Hub
+#      uses: docker/build-push-action@v1
+#      with:
+#       username: ${{ secrets.DOCKER_HUB_USERNAME }}
+#       password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+#       repository: maklisa2000/pengu_classroom
+#       tags: latest
