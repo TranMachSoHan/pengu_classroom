@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Account;
 import rmit.models.Course;
-import rmit.models.Teacher;
+import rmit.models.Event;
 import rmit.repositories.CourseRepository;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -41,5 +42,11 @@ public class CourseService {
         Course course = courseRepository.findById(course_id)
                 .orElseThrow(()-> new ResourceNotFoundException("Course not found for this id :: " + course_id));
         this.courseRepository.delete(course);
+    }
+
+    public Collection<Event> getAllEventByCourseId(Integer course_id) throws ResourceNotFoundException{
+        Course course = courseRepository.findById(course_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found for this id :: " + course_id));
+        return course.getEvent();
     }
 }

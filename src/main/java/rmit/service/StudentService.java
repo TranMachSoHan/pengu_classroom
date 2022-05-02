@@ -3,9 +3,11 @@ package rmit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rmit.exceptions.ResourceNotFoundException;
+import rmit.models.Enrollment;
 import rmit.models.Student;
 import rmit.repositories.StudentRepository;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -25,6 +27,12 @@ public class StudentService {
     public Student createStudent(Student student) {
 
         return studentRepository.save(student);
+    }
+
+    public Collection<Enrollment> getEnrollmentByStudent(Integer studentId) throws ResourceNotFoundException{
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + studentId));
+        return  student.getEnrollmentList();
     }
 
     public Student updateStudent(Integer accountId, Student student) throws ResourceNotFoundException {
