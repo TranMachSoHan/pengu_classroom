@@ -18,8 +18,6 @@
         <java.version>8</java.version>
     </properties>
 
-    <packaging>jar</packaging>
-
     <groupId>sadi</groupId>
     <artifactId>hellospringannotation</artifactId>
     <version>1.0-SNAPSHOT</version>
