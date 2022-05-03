@@ -53,7 +53,7 @@ public class StudentController {
     }
 
     @GetMapping("students/get_timetable/{student_id}")
-    public JSONArray getStudentTimetable(@PathVariable(value = "id") Integer accountId)
+    public JSONArray getStudentTimetable(@PathVariable(value = "student_id") Integer accountId)
             throws ResourceNotFoundException {
         Collection<Enrollment> enroll = studentService.getEnrollmentByStudent(accountId);
         JSONArray jsonArray = new JSONArray();
