@@ -30,3 +30,17 @@ build/
 
 ### VS Code ###
 .vscode/
+target/docker/image-id
+target/docker/image-name
+target/docker/repository
+target/docker/tag
+target/hellospringannotation-1.0-SNAPSHOT-docker-info.jar
+target/hellospringannotation-1.0-SNAPSHOT.jar
+target/hellospringannotation-1.0-SNAPSHOT.jar.original
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/test-classes/META-INF/docker/sadi/hellospringannotation/image-id
+target/test-classes/META-INF/docker/sadi/hellospringannotation/image-name
+target/test-classes/META-INF/docker/sadi/hellospringannotation/repository
+target/test-classes/META-INF/docker/sadi/hellospringannotation/tag
