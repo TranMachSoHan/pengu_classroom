@@ -65,14 +65,14 @@ public class TeacherController {
     }
 
     //get all courses that are currently taught by teacher
-    @GetMapping("teachers/{id}/courses")
+    @GetMapping("teachers/{id}/all-courses")
     public ResponseEntity<Collection<Course>> getTeachingCourse(@PathVariable(value = "id") int teacher_id) throws ResourceNotFoundException {
 
         return ResponseEntity.ok().body(teacherService.getAllTeachingCourses(teacher_id));
     }
 
     //create new course and assign to current teacher
-    @PostMapping("teachers/{id}/courses/add_course")
+    @PostMapping("teachers/{id}/add-course")
     public Course createNewCourse(@PathVariable(value = "id") int teacher_id, @RequestBody Course course)
             throws ResourceNotFoundException {
         Teacher teacher = teacherService.getTeacherById(teacher_id);

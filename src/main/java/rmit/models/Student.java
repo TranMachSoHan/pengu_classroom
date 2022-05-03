@@ -11,22 +11,26 @@ import java.util.List;
 @Table(name = "students")
 public class Student extends Account {
 
-    @Column(name = "average_mark", nullable = false)
+    @Column(name = "average_mark", nullable = true)
     private float average_mark;
 
-    @Column(name = "nickname", nullable = false)
+    @Column(name = "nickname", nullable = true)
     private String nickname;
+
+    @Column(name = "student_id", nullable = true)
+    private String studentId;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private List<Enrollment> enrollmentList = new ArrayList<>();
 
 
-    public Student(int id, String username, String password, String profile_picture, float average_mark, String nickname, List<Enrollment> enrollmentList) {
+    public Student(int id, String username, String password, String profile_picture, float average_mark, String nickname, List<Enrollment> enrollmentList, String studentId) {
         super(id, username, password, profile_picture, Role.STUDENT);
         this.average_mark = average_mark;
         this.nickname = nickname;
         this.enrollmentList = enrollmentList;
+        this.studentId = studentId;
     }
 
     public Student() {
@@ -40,24 +44,5 @@ public class Student extends Account {
     public void setEnrollmentList(List<Enrollment> enrollmentList) {
         this.enrollmentList = enrollmentList;
     }
-
-//    @Override
-//    public String toString(){
-//        String info = "";
-//        JSONObject jsonInfo = new JSONObject();
-//        jsonInfo.put("nickname",this.nickname );
-//        jsonInfo.put("average mark",this.average_mark );
-//        JSONArray courseArray = new JSONArray();
-//        if(this.courseCollection != null && courseCollection.size() >0){
-//            this.courseCollection.forEach(course -> {
-//                JSONObject subCourse = new JSONObject();
-//                subCourse.put("name", course.getTitle());
-//                courseArray.put(subCourse);
-//            });
-//        }
-//        jsonInfo.put("courses", courseArray);
-//        info = jsonInfo.toString();
-//        return info;
-//    }
 
 }

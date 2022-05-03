@@ -30,6 +30,7 @@ build/
 
 ### VS Code ###
 .vscode/
+target/*
 target/docker/image-id
 target/docker/image-name
 target/docker/repository
@@ -44,3 +45,25 @@ target/test-classes/META-INF/docker/sadi/hellospringannotation/image-id
 target/test-classes/META-INF/docker/sadi/hellospringannotation/image-name
 target/test-classes/META-INF/docker/sadi/hellospringannotation/repository
 target/test-classes/META-INF/docker/sadi/hellospringannotation/tag
+target/classes/rmit/service/SubmissionService.class
+target/classes/rmit/repositories/SubmissionRepository.class
+target/classes/rmit/models/Submission.class
+target/classes/rmit/models/Student.class
+target/classes/rmit/models/Homework.class
+target/classes/rmit/controllers/TeacherController.class
+target/classes/rmit/controllers/SubmissionController.class
+target/classes/rmit/controllers/HomeworkController.class
+target/classes/rmit/controllers/EnrollmentController.class
+target/classes/rmit/controllers/CourseController.class
+target/classes/application.properties
+target/classes/rmit/service/SubmissionService.class
+target/classes/rmit/repositories/SubmissionRepository.class
+target/classes/rmit/models/Submission.class
+target/classes/rmit/models/Student.class
+target/classes/rmit/models/Homework.class
+target/classes/rmit/controllers/TeacherController.class
+target/classes/rmit/controllers/SubmissionController.class
+target/classes/rmit/controllers/HomeworkController.class
+target/classes/rmit/controllers/EnrollmentController.class
+target/classes/rmit/controllers/CourseController.class
+target/classes/application.properties
