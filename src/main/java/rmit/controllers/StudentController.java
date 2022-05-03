@@ -57,19 +57,41 @@ public class StudentController {
             throws ResourceNotFoundException {
         Collection<Enrollment> enroll = studentService.getEnrollmentByStudent(accountId);
         JSONArray jsonArray = new JSONArray();
+
         for(Enrollment e : enroll){ //EXAMPLE: 3 ENROLL -> 3 COURSE
+            JSONObject jsonObjectCourse = new JSONObject();
+            jsonObjectCourse.put("course_name: ", e.getCourse().getTitle());
             int courseId = e.getCourse().getId(); // REQUIRE THE COURSE ID FROM ENROLLMENT
+
             Collection<Event> events = courseService.getAllEventByCourseId(courseId);
             for(Event ee : events) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("startTime", ee.getStartTime());
-                jsonObject.put("endTime", ee.getEndTime());
-                jsonObject.put("day", ee.getDay());
-                jsonArray.put(jsonObject);
+                JSONObject jsonObjectEvent = new JSONObject();
+                jsonObjectEvent.put("course_name: ", e.getCourse().getTitle());
+                jsonObjectEvent.put("day: ", ee.getDay());
+                jsonObjectEvent.put("time_zone: ", ee.getZone());
+                jsonArray.put(jsonObjectEvent);
             }
         }
         return jsonArray;
     }
 
-
 }
+
+
+//events = [
+//        {
+//        'course_name': 'EnterpriseApplication',
+//        'detail_event' :[
+//        {
+//        'id':1,
+//        'day':'MON',
+//        'time_zone' : 'I',
+//        },
+//        {
+//        'id':2,
+//        'day':'FRI',
+//        'time_zone' : 'II',
+//        }
+//        ],
+//        }
+//        ]
