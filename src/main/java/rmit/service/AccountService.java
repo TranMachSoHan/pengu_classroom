@@ -24,10 +24,10 @@ public class AccountService {
     }
 
 
-    public Account getAccountByUsername(String username) throws ResourceNotFoundException{
-        return accountRepository.findBy(username)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + username));
-    }
+//    public Account getAccountByUsername(String username) throws ResourceNotFoundException{
+//        return accountRepository.findBy(username)
+//                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + username));
+//    }
 
     public Account createAccount( Account account) {
         return accountRepository.save(account);
