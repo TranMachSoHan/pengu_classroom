@@ -68,3 +68,10 @@ target/classes/rmit/security/WebSecurityConfiguration.class
 target/classes/rmit/service/AccountService.class
 target/classes/rmit/service/CourseService.class
 target/classes/rmit/service/SubmissionService.class
+target/classes/rmit/config/S3Config.class
+target/classes/rmit/controllers/S3Controller.class
+target/classes/rmit/models/HomeworkType.class
+target/classes/rmit/service/EnrollmentService.class
+target/classes/rmit/service/FileServiceImpl.class
+target/classes/rmit/service/HomeworkService.class
+target/classes/rmit/service/S3Service.class
