@@ -5,10 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Account;
+import rmit.models.Course;
 import rmit.repositories.AccountRepository;
 import rmit.repositories.StudentRepository;
 import rmit.service.AccountService;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +32,10 @@ public class AccountController {
         return ResponseEntity.ok().body(accountService.getAccountById(accountId));
     }
 
-    @GetMapping("accounts/login/{username, password}")
-    public ResponseEntity<Account>  getAccountByUsername(@PathVariable(value = "username") String username, String password) throws ResourceNotFoundException {
-        return ResponseEntity.ok().body(accountService.getAccountByUsername(username));
-    }
+//    @GetMapping("accounts/login/{username, password}")
+//    public ResponseEntity<Account>  getAccountByUsername(@PathVariable(value = "username") String username, String password) throws ResourceNotFoundException {
+//        return ResponseEntity.ok().body(accountService.getAccountByUsername(username));
+//    }
 
     @PostMapping("accounts/signup")
     public Account signUp( @RequestBody Account account) {return accountService.createAccount(account);}
