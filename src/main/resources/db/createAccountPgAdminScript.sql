@@ -1,67 +1,111 @@
-	INSERT INTO public.account(
-	id, password, profile_picture,role, username)
-	VALUES (1, '123', '123','TEACHER','teacher1');
+INSERT INTO public.account(
+    id, password, profile_picture,role, username)
+VALUES (1, '123', '123','TEACHER','teacher1');
 
 INSERT INTO public.account(
-	id, password, profile_picture, role, username)
-	VALUES (2, '123', '123', 'TEACHER', 'teacher2');
+    id, password, profile_picture, role, username)
+VALUES (2, '123', '123', 'TEACHER', 'teacher2');
 
 INSERT INTO public.account(
-	id, password, profile_picture, role, username)
-	VALUES (3, '123', '123', 'STUDENT', 'student1');
+    id, password, profile_picture, role, username)
+VALUES (3, '123', '123', 'STUDENT', 'student1');
 
 INSERT INTO public.account(
-	id, password, profile_picture,role, username)
-	VALUES (4, '123', '123', 'STUDENT', 'student2');
+    id, password, profile_picture,role, username)
+VALUES (4, '123', '123', 'STUDENT', 'student2');
+
+INSERT INTO public.account(
+    id, password, profile_picture, role, username)
+VALUES (5, '123', '123', 'STUDENT', 'student3');
+
+INSERT INTO public.account(
+    id, password, profile_picture, role, username)
+VALUES (6, '123', '123', 'STUDENT', 'student4');
+
+INSERT INTO public.account(
+    id, password, profile_picture, role, username)
+VALUES (7, '123', '123', 'STUDENT', 'student5');
 
 INSERT INTO public.students(
-	average_mark, nickname, id)
-	VALUES (8, 'student1', 3);
+    average_mark, nickname, student_id, id)
+VALUES (8, 'student1', '12345678910112', 3);
 
 INSERT INTO public.students(
-	average_mark, nickname, id)
-	VALUES (8, 'student2', 4);
+    average_mark, nickname, student_id, id)
+VALUES (6, 'student2','23412345682345', 4);
+
+INSERT INTO public.students(
+    average_mark, nickname, student_id, id)
+VALUES (6, 'student3', '12345622910112', 5);
+
+INSERT INTO public.students(
+    average_mark, nickname, student_id, id)
+VALUES (11, 'student4', '12345678910122', 6);
+
+INSERT INTO public.students(
+    average_mark, nickname, student_id, id)
+VALUES (12, 'student5', '12345678910132', 7);
 
 INSERT INTO public.teachers(
-	id)
-	VALUES (1);
+    id)
+VALUES (1);
 
 INSERT INTO public.teachers(
-	id)
-	VALUES (2);
+    id)
+VALUES (2);
 
 INSERT INTO public.courses(
-	id, course_code, description, end_time, start_time, title, teacher_id)
-	VALUES (5, 'C1', 'des', '2019-04-28T14:45:15', '2019-04-28T14:45:15', 'course1', '1');
+    id, course_code, description, end_time, start_time, title, teacher_id)
+VALUES (50, 'C1', 'des', '2019-04-28', '2019-04-28', 'course1', '1');
 
 INSERT INTO public.courses(
-	id, course_code, description, end_time, start_time, title, teacher_id)
-	VALUES (6, 'C2', 'des', '2019-04-28T14:45:15', '2019-04-28T14:45:15', 'course2', '2');
+    id, course_code, description, end_time, start_time, title, teacher_id)
+VALUES (51, 'C2', 'des', '2020-04-28', '2020-04-28', 'course2', '2');
+
+INSERT INTO public.courses(
+    id, course_code, description, end_time, start_time, title, teacher_id)
+VALUES (52, 'C3', 'des', '2019-04-30', '2019-06-18', 'course3', '1');
+
+INSERT INTO public.courses(
+    id, course_code, description, end_time, start_time, title, teacher_id)
+VALUES (53, 'C4', 'des', '2019-04-28', '2019-04-28', 'course4', '2');
+
+INSERT INTO public.courses(
+    id, course_code, description, end_time, start_time, title, teacher_id)
+VALUES (54, 'C5', 'des', '2019-04-28', '2019-04-28', 'course5', '1');
+
+INSERT INTO public.courses(
+    id, course_code, description, end_time, start_time, title, teacher_id)
+VALUES (55, 'C6', 'des', '2019-04-28', '2019-04-28', 'course6', '2');
 
 INSERT INTO public.enrollments(
-	id, course_code, course_id, student_id)
-	VALUES (10, 'C1', 5, 3);
+    id, course_code, course_id, student_id)
+VALUES (20, 'C1', 50, 3);
 
 INSERT INTO public.enrollments(
-	id, course_code, course_id, student_id)
-	VALUES (11, 'C1', 5, 4);
+    id, course_code, course_id, student_id)
+VALUES (21, 'C2', 51, 4);
 
 INSERT INTO public.enrollments(
-	id, course_code, course_id, student_id)
-	VALUES (12, 'C2', 6, 4);
---
--- INSERT INTO public.submission(
--- 	id, data, name, type)
--- 	VALUES (50, 1, 'Sub1', 'word');
---
--- INSERT INTO public.submission(
--- 	id, data, name, type)
--- 	VALUES (51, 2, 'Sub2', 'word');
+    id, course_code, course_id, student_id)
+VALUES (22, 'C1', 50, 4);
 
--- INSERT INTO public.homeworks(
--- 	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id, submission_id)
--- 	VALUES (31, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 11, 51);
---
--- INSERT INTO public.homeworks(
--- 	id, description, due_date, feedbacks, is_submitted, marks, titles, enrollment_id, submission_id)
--- 	VALUES (30, 'a', '2019-04-28T14:45:15', 'a', TRUE, 4, 'h1', 10, 50);
+INSERT INTO public.enrollments(
+    id, course_code, course_id, student_id)
+VALUES (23, 'C1', 50, 5);
+
+INSERT INTO public.enrollments(
+    id, course_code, course_id, student_id)
+VALUES (24, 'C1', 50, 6);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
+VALUES (30, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 5.0, null, 'a', 20);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
+VALUES (31, 'a', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.0, null, 'a', 21);
+
+INSERT INTO public.events(
+    id, day, end_time, start_time, timezone, course_id)
+VALUES (80, 'Monday', '2022-04-30', '2022-05-30', 'III', 50);
