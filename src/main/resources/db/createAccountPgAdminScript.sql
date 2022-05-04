@@ -45,6 +45,10 @@ INSERT INTO public.enrollments(
 INSERT INTO public.enrollments(
 	id, course_code, course_id, student_id)
 	VALUES (11, 'C1', 5, 4);
+
+INSERT INTO public.enrollments(
+	id, course_code, course_id, student_id)
+	VALUES (12, 'C2', 6, 4);
 --
 -- INSERT INTO public.submission(
 -- 	id, data, name, type)
