@@ -97,7 +97,7 @@ public class TeacherController {
     }
 
     @GetMapping("teachers/get_timetable/{teacher_id}")
-    public JSONArray getTeacherTimetable(@PathVariable(value = "id") Integer accountId)
+    public JSONArray getTeacherTimetable(@PathVariable(value = "teacher_id") Integer accountId)
             throws ResourceNotFoundException {
         Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
         JSONArray jsonArray = new JSONArray();
@@ -109,9 +109,9 @@ public class TeacherController {
 
             for(Event ee : events) {
                 JSONObject jsonObjectEvent = new JSONObject();
-                jsonObjectEvent.put("course_name: ", c.getTitle());
-                jsonObjectEvent.put("day: ", ee.getDay());
-                jsonObjectEvent.put("time_zone: ", ee.getZone());
+                jsonObjectEvent.put("courseName", c.getTitle());
+                jsonObjectEvent.put("day", ee.getDay());
+                jsonObjectEvent.put("timeZone", ee.getZone());
                 jsonArray.put(jsonObjectEvent);
             }
         }
