@@ -1,5 +1,7 @@
 package rmit.models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,6 +15,7 @@ import java.util.Date;
 @Data
 @JsonIgnoreProperties({"teacher"})
 @Table(name = "courses")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,9 +25,11 @@ public class Course {
     private String title;
 
     @Column(name = "startTime", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date startTime;
 
     @Column(name = "endTime", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date endTime;
 
     @Column(name = "courseCode", nullable = false)
@@ -32,19 +37,6 @@ public class Course {
 
     @Column(name = "description", nullable = false)
     private String description;
-
-    public Course(){}
-    public Course(String title){
-        this.title = title;
-    }
-
-    public Collection<Event> getEvent() {
-        return events;
-    }
-
-    public void setEvent(Collection<Event> events) {
-        this.events = events;
-    }
 
     @ManyToOne
     @JoinColumn(name="teacher_id")
@@ -59,12 +51,27 @@ public class Course {
         this.courseCode = course.getCourseCode();
         this.description = course.getDescription();
         this.teacher = course.getTeacher();
-//        this.studentCollection = course.getStudentCollection();
     }
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Collection<Event> events;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Collection<Enrollment> enrollments;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private Collection<Event> events;
+    public Course(){}
+
+    public Course(int id, String title, Date startTime, Date endTime, String courseCode,
+                  String description, Teacher teacher, Collection<Enrollment> enrollments,
+                  Collection<Event> events) {
+        this.id = id;
+        this.title = title;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.courseCode = courseCode;
+        this.description = description;
+        this.teacher = teacher;
+        this.enrollments = enrollments;
+        this.events = events;
+    }
 }

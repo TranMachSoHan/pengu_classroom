@@ -12,10 +12,7 @@ import rmit.repositories.*;
 import rmit.service.CourseService;
 import rmit.service.TeacherService;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -81,19 +78,19 @@ public class TeacherController {
 
     //summarize student mark in course
     @GetMapping("teachers/courses/{course_id}/summary")
-    public JSONArray summarizeStudentMark(@PathVariable(value = "course_id") int courseId) throws ResourceNotFoundException {
+    public ResponseEntity<List<Map<String, Object>>> summarizeStudentMark(@PathVariable(value = "course_id") int courseId) throws ResourceNotFoundException {
         Course course = courseService.getCourseById(courseId);
-        JSONArray jsonArray = new JSONArray();
+        List<Map<String, Object>> list = new ArrayList<>();
         Collection<Enrollment> enrollmentCollection = course.getEnrollments();
         for (Enrollment enrollment : enrollmentCollection) {
+            Map<String,Object> response = new HashMap<>();
             Student student = enrollment.getStudent();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("nickname", student.getNickname());
-            jsonObject.put("id", student.getId());
-            jsonObject.put("homeworkList", enrollment.getHomework());
-            jsonArray.put(jsonObject);
+            response.put("nickname", student.getNickname());
+            response.put("id", student.getStudentId());
+            response.put("homeworkList", enrollment.getHomeworks());
+            list.add(response);
         }
-        return jsonArray;
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("teachers/get_timetable/{teacher_id}")

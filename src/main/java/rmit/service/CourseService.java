@@ -46,6 +46,6 @@ public class CourseService {
     public Collection<Event> getAllEventByCourseId(Integer course_id) throws ResourceNotFoundException{
         Course course = courseRepository.findById(course_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found for this id :: " + course_id));
-        return course.getEvent();
+        return course.getEvents();
     }
 }

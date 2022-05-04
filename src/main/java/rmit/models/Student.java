@@ -1,5 +1,6 @@
 package rmit.models;
-
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,6 +10,8 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "students")
+@JsonIgnoreProperties({"enrollmentList"})
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Student extends Account {
 
     @Column(name = "average_mark", nullable = true)
@@ -35,14 +38,4 @@ public class Student extends Account {
 
     public Student() {
     }
-
-
-    public List<Enrollment> getEnrollmentList() {
-        return enrollmentList;
-    }
-
-    public void setEnrollmentList(List<Enrollment> enrollmentList) {
-        this.enrollmentList = enrollmentList;
-    }
-
 }

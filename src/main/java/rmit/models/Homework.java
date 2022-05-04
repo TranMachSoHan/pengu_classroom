@@ -1,5 +1,6 @@
 package rmit.models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Data
 @Table(name = "homeworks")
 @JsonIgnoreProperties({"enrollment"})
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 
 public class Homework {
     @Id
@@ -53,32 +55,11 @@ public class Homework {
 //    @JoinColumn(name = "submission_id")
 //    private Submission submission;
 
-
-    @ManyToOne
-    @JoinColumn(name="enrollment_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "enrollment_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Enrollment enrollment;
-
-    public Homework(){}
-
-    public Homework(int id, String title, String description,
-                    float mark, HomeworkType homeworkType, String feedback,
-                    Boolean isSubmitted, Boolean isPublished, Boolean isGraded,
-                    Date dueDate, String submissionLink, Enrollment enrollment) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.mark = mark;
-        this.homeworkType = homeworkType;
-        this.feedback = feedback;
-        this.isSubmitted = isSubmitted;
-        this.isPublished = isPublished;
-        this.isGraded = isGraded;
-        this.dueDate = dueDate;
-        this.submissionLink = submissionLink;
-        this.enrollment = enrollment;
-    }
 
     public void updateHomework(Homework homework) {
         this.id = homework.getId();
@@ -94,109 +75,5 @@ public class Homework {
 //        this.submission = homework.getSubmission();
         this.enrollment = homework.getEnrollment();
         this.submissionLink = homework.getSubmissionLink();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public float getMark() {
-        return mark;
-    }
-
-    public void setMark(float mark) {
-        this.mark = mark;
-    }
-
-    public HomeworkType getHomeworkType() {
-        return homeworkType;
-    }
-
-    public void setHomeworkType(HomeworkType homeworkType) {
-        this.homeworkType = homeworkType;
-    }
-
-    public String getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
-
-    public Boolean getSubmitted() {
-        return isSubmitted;
-    }
-
-    public void setSubmitted(Boolean submitted) {
-        isSubmitted = submitted;
-    }
-
-    public Boolean getPublished() {
-        return isPublished;
-    }
-
-    public void setPublished(Boolean published) {
-        isPublished = published;
-    }
-
-    public Boolean getGraded() {
-        return isGraded;
-    }
-
-    public void setGraded(Boolean graded) {
-        isGraded = graded;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
-//    public Submission getSubmission() {
-//        return submission;
-//    }
-//
-//    public void setSubmission(Submission submission) {
-//        this.submission = submission;
-//    }
-
-    public Enrollment getEnrollment() {
-        return enrollment;
-    }
-
-    public void setEnrollment(Enrollment enrollment) {
-        this.enrollment = enrollment;
-    }
-
-    public String getSubmissionLink() {
-        return submissionLink;
-    }
-
-    public void setSubmissionLink(String submissionLink) {
-        this.submissionLink = submissionLink;
     }
 }

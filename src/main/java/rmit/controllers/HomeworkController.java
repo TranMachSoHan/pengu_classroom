@@ -1,5 +1,7 @@
 package rmit.controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,7 @@ import rmit.models.Course;
 import rmit.models.Enrollment;
 import rmit.models.Homework;
 import rmit.repositories.CourseRepository;
+import rmit.service.CourseService;
 import rmit.service.HomeworkService;
 
 import java.util.*;
@@ -18,7 +21,7 @@ public class HomeworkController {
     @Autowired
     private HomeworkService homeworkService;
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseService courseService;
 
     @GetMapping("homeworks")
     public List<Homework> getAllHomework(){
@@ -64,17 +67,17 @@ public class HomeworkController {
     }
 
     //create homework then assign it to all enrollments in course
-    @PutMapping("teacher/courses/{id}/add-homework")
-    public String createNewHomework(@RequestBody Homework homework, @PathVariable(value = "id") int courseId)
+    @PostMapping("teachers/courses/{id}/add-homework")
+    public Course createNewHomework(@RequestBody JsonNode homeworkJson, @PathVariable(value = "id") int courseId)
             throws ResourceNotFoundException {
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(()-> new ResourceNotFoundException("Course not found for this id :: " + courseId));
+        Course course = courseService.getCourseById(courseId);
         Collection<Enrollment> enrollmentCollection = course.getEnrollments();
         for(Enrollment enrollment : enrollmentCollection) {
-            enrollment.getHomework().add(homework);
+            Homework homework = new ObjectMapper().convertValue(homeworkJson, Homework.class);
+            homework.setEnrollment(enrollment);
+            enrollment.getHomeworks().add(homework);
+            homeworkService.createHomework(homework);
         }
-        homeworkService.createHomework(homework);
-        return "redirect:/homeworks";
+        return course;
     }
-
 }

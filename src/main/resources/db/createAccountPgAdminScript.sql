@@ -106,6 +106,6 @@ INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
 VALUES (31, 'a', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.0, null, 'a', 21);
 
-INSERT INTO public.events(
-    id, day, end_time, start_time, timezone, course_id)
-VALUES (80, 'Monday', '2022-04-30', '2022-05-30', 'III', 50);
+-- INSERT INTO public.events(
+--     id, day, end_time, start_time, timezone, course_id)
+-- VALUES (80, 'Monday', '2022-04-30', '2022-05-30', 'III', 50);

@@ -21,15 +21,6 @@ public class Teacher extends Account {
         super(id, user_name, password, profile_picture, Role.TEACHER);
         this.courses=courses;
     }
-
-    public Collection<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(Collection<Course> courses) {
-        this.courses = courses;
-    }
-
 }
 
 
