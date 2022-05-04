@@ -113,3 +113,7 @@ target/classes/rmit/service/StudentService.class
 target/classes/rmit/service/SubmissionService.class
 target/classes/rmit/service/TeacherService.class
 target/classes/rmit/Swagger2Config.class
+target/classes/rmit/controllers/AccountController.class
+target/classes/rmit/controllers/StudentController.class
+target/classes/rmit/controllers/TeacherController.class
+target/classes/rmit/service/AccountService.class
