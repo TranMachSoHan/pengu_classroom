@@ -93,25 +93,42 @@ public class TeacherController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("teachers/get_timetable/{teacher_id}")
-    public JSONArray getTeacherTimetable(@PathVariable(value = "teacher_id") Integer accountId)
+    @GetMapping("students/get_timetable/{teacher_id}")
+    public ResponseEntity<List<Map<String, Object>>> getTeacherTimetable(@PathVariable(value = "teacher_id") int accountId)
             throws ResourceNotFoundException {
         Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
-        JSONArray jsonArray = new JSONArray();
-
-        for(Course c : courses){ //EXAMPLE: 3 ENROLL -> 3 COURSE
-            JSONObject jsonObjectCourse = new JSONObject();
-            int courseId = c.getId(); // REQUIRE THE COURSE ID
-            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
-
-            for(Event ee : events) {
-                JSONObject jsonObjectEvent = new JSONObject();
-                jsonObjectEvent.put("courseName", c.getTitle());
-                jsonObjectEvent.put("day", ee.getDay());
-                jsonObjectEvent.put("timeZone", ee.getZone());
-                jsonArray.put(jsonObjectEvent);
-            }
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (Course c : courses) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("courseTitle", c.getTitle());
+            response.put("courseId", c.getId());
+            response.put("courseDescription", c.getDescription());
+            response.put("courseCode", c.getCourseCode());
+            list.add(response);
         }
-        return jsonArray;
+        return ResponseEntity.ok().body(list);
     }
+
+    //get the teacher's timetable
+//    @GetMapping("teachers/get_timetable/{teacher_id}")
+//    public JSONArray getTeacherTimetable(@PathVariable(value = "teacher_id") Integer accountId)
+//            throws ResourceNotFoundException {
+//        Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for(Course c : courses){ //EXAMPLE: 3 ENROLL -> 3 COURSE
+//            JSONObject jsonObjectCourse = new JSONObject();
+//            int courseId = c.getId(); // REQUIRE THE COURSE ID
+//            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
+//
+//            for(Event ee : events) {
+//                JSONObject jsonObjectEvent = new JSONObject();
+//                jsonObjectEvent.put("courseName", c.getTitle());
+//                jsonObjectEvent.put("day", ee.getDay());
+//                jsonObjectEvent.put("timeZone", ee.getZone());
+//                jsonArray.put(jsonObjectEvent);
+//            }
+//        }
+//        return jsonArray;
+//    }
 }
