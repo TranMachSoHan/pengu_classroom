@@ -23,7 +23,8 @@ public class Event {
     private String day;
 
     @Column(name = "timezone", nullable = false)
-    private timezone zone;
+    @Enumerated(value = EnumType.STRING)
+    private TimeZoneType timeZoneType;
 
     public int getId() {
         return id;
@@ -54,22 +55,12 @@ public class Event {
         this.day = day;
     }
 
-    public enum timezone{
-        I,
-        II,
-        III,
-        IV,
-        V,
-        VI,
-        VII;
+    public TimeZoneType getZone(){
+        return timeZoneType;
     }
 
-    public timezone getZone(){
-        return zone;
-    }
-
-    public void setTimeZone(timezone zone){
-        this.zone = zone;
+    public void setTimeZone(TimeZoneType zone){
+        this.timeZoneType = zone;
     }
 
     @ManyToOne
