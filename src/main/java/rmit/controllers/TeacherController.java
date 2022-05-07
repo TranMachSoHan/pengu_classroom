@@ -93,18 +93,28 @@ public class TeacherController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("students/get_timetable/{teacher_id}")
+    @GetMapping("teachers/get_timetable/{teacher_id}")
     public ResponseEntity<List<Map<String, Object>>> getTeacherTimetable(@PathVariable(value = "teacher_id") int accountId)
             throws ResourceNotFoundException {
         Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
         List<Map<String, Object>> list = new ArrayList<>();
+
         for (Course c : courses) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("courseTitle", c.getTitle());
-            response.put("courseId", c.getId());
-            response.put("courseDescription", c.getDescription());
-            response.put("courseCode", c.getCourseCode());
-            list.add(response);
+            int courseId = c.getId();
+            List<Map<String, Object>> eventList = new ArrayList<>();
+            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
+            Map<String, Object> courseResponse = new HashMap<>();
+
+            courseResponse.put("courseTitle", c.getTitle());
+            for (Event e : events){
+                Map<String, Object> eventResponse = new HashMap<>();
+                eventResponse.put("id", e.getId());
+                eventResponse.put("day", e.getDay());
+                eventResponse.put("timezone", e.getZone());
+                eventList.add(eventResponse);
+            }
+            courseResponse.put("details_event:",eventList);
+            list.add(courseResponse);
         }
         return ResponseEntity.ok().body(list);
     }
