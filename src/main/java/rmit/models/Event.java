@@ -20,7 +20,8 @@ public class Event {
     private Date endTime;
 
     @Column(name = "day", nullable = false)
-    private String day;
+    @Enumerated(value = EnumType.STRING)
+    private DayType day;
 
     @Column(name = "timezone", nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -47,11 +48,11 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public String getDay(){
+    public DayType getDay(){
         return day;
     }
 
-    public void setDay(){
+    public void setDay(DayType day){
         this.day = day;
     }
 
