@@ -20,10 +20,12 @@ public class Event {
     private Date endTime;
 
     @Column(name = "day", nullable = false)
-    private String day;
+    @Enumerated(value = EnumType.STRING)
+    private DayType day;
 
     @Column(name = "timezone", nullable = false)
-    private timezone zone;
+    @Enumerated(value = EnumType.STRING)
+    private TimeZoneType timeZoneType;
 
     public int getId() {
         return id;
@@ -46,30 +48,20 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public String getDay(){
+    public DayType getDay(){
         return day;
     }
 
-    public void setDay(){
+    public void setDay(DayType day){
         this.day = day;
     }
 
-    public enum timezone{
-        I,
-        II,
-        III,
-        IV,
-        V,
-        VI,
-        VII;
+    public TimeZoneType getZone(){
+        return timeZoneType;
     }
 
-    public timezone getZone(){
-        return zone;
-    }
-
-    public void setTimeZone(timezone zone){
-        this.zone = zone;
+    public void setTimeZone(TimeZoneType zone){
+        this.timeZoneType = zone;
     }
 
     @ManyToOne
