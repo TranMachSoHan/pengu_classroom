@@ -52,12 +52,13 @@ public class EventController {
     }
 
     @PostMapping("events/{id}/add_newEvent")
-    public Event createNewEvent(@RequestBody JsonNode eventJson, @PathVariable(value = "id") int courseId)
+    public Course createNewEvent(@RequestBody JsonNode eventJson, @PathVariable(value = "id") int courseId)
             throws ResourceNotFoundException {
         Course course = courseService.getCourseById(courseId);
         Event event = new ObjectMapper().convertValue(eventJson, Event.class);
         course.getEvents().add(event);
-        return eventRepository.save(event);
+        eventRepository.save(event);
+        return course;
     }
 
 //    @PostMapping("teachers/courses/{id}/add-homework")
@@ -73,7 +74,7 @@ public class EventController {
 //        }
 //        return course;
 //    }
-//
+////
     @PostMapping("post_event_timetable")
     public Event postEvent(@RequestBody Event event) {
         //course_id
