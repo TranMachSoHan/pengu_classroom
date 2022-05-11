@@ -74,4 +74,8 @@ public class Course {
         this.enrollments = enrollments;
         this.events = events;
     }
+
+    public void setEvent(Collection<Event> events) {
+        this.events = events;
+    }
 }

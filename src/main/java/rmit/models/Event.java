@@ -13,15 +13,8 @@ public class Event {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "startTime", nullable = false)
-    private Date startTime;
-
-    @Column(name = "endTime", nullable = false)
-    private Date endTime;
-
     @Column(name = "day", nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private DayType day;
+    private String day;
 
     @Column(name = "timezone", nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -34,25 +27,11 @@ public class Event {
         this.id = id;
     };
 
-    public Date getStartTime() {
-        return startTime;
-    }
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public DayType getDay(){
+    public String getDay(){
         return day;
     }
 
-    public void setDay(DayType day){
+    public void setDay(){
         this.day = day;
     }
 

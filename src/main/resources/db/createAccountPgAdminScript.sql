@@ -102,8 +102,6 @@ INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
 VALUES (25, 'C1', 50, 5);
 
-
-
 INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
 VALUES (30, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 5.0, null, 'a', 20);
@@ -113,33 +111,33 @@ INSERT INTO public.homeworks(
 VALUES (31, 'a', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.0, null, 'a', 21);
 
  INSERT INTO public.events(
-     id, day, end_time, start_time, timezone, course_id)
- VALUES (80, 'MON', '2022-04-30', '2022-05-30', 'II', 50);
+     id, day, timezone, course_id)
+ VALUES (80, 'Monday', 'II', 50);
 
  INSERT INTO public.events(
-     id, day, end_time, start_time, timezone, course_id)
- VALUES (81, 'MON', '2022-04-30', '2022-05-30', 'III', 50);
+     id, day, timezone, course_id)
+ VALUES (81, 'Monday', 'III', 50);
 
 INSERT INTO public.events(
-     id, day, end_time, start_time, timezone, course_id)
- VALUES (82, 'MON', '2022-04-30', '2022-05-30', 'IV', 50);
+     id, day, timezone, course_id)
+ VALUES (82, 'Monday', 'IV', 50);
 
  INSERT INTO public.events(
-      id, day, end_time, start_time, timezone, course_id)
-  VALUES (83, 'WED', '2022-04-30', '2022-05-30', 'III', 50);
+      id, day, timezone, course_id)
+  VALUES (83, 'Wednesday', 'III', 50);
 
  INSERT INTO public.events(
-     id, day, end_time, start_time, timezone, course_id)
- VALUES (84, 'MON', '2022-04-30', '2022-05-30', 'III', 51);
+     id, day, timezone, course_id)
+ VALUES (84, 'Monday', 'III', 51);
 
  INSERT INTO public.events(
-     id, day, end_time, start_time, timezone, course_id)
- VALUES (85, 'MON', '2022-04-30', '2022-05-30', 'III', 51);
+     id, day, timezone, course_id)
+ VALUES (85, 'Monday', 'III', 51);
 
   INSERT INTO public.events(
-      id, day, end_time, start_time, timezone, course_id)
-  VALUES (86, 'MON', '2022-04-30', '2022-05-30', 'III', 52);
+      id, day, timezone, course_id)
+  VALUES (86, 'Monday', 'III', 52);
 
    INSERT INTO public.events(
-       id, day, end_time, start_time, timezone, course_id)
-   VALUES (87, 'MON', '2022-04-30', '2022-05-30', 'III', 54);
+       id, day, timezone, course_id)
+   VALUES (87, 'Monday', 'III', 54);
