@@ -1,5 +1,6 @@
 package rmit.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -7,12 +8,15 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Date;
 
+
+@JsonIgnoreProperties({"course"})
 @Entity
 @Data
 @Table(name = "events")
 public class Event {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "day", nullable = false)

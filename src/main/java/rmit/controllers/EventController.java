@@ -51,36 +51,15 @@ public class EventController {
         return eventRepository.save(event);
     }
 
-    @PostMapping("events/{course_id}/add_newEvent")
+    @PostMapping("events/{course_id}/add_new_event")
     public Course createNewEvent(@RequestBody JsonNode eventJson, @PathVariable(value = "course_id") int courseId)
             throws ResourceNotFoundException {
         Course course = courseService.getCourseById(courseId);
         Event event = new ObjectMapper().convertValue(eventJson, Event.class);
+        event.setCourse(course);
         course.getEvents().add(event);
         eventRepository.save(event);
         return course;
-    }
-
-//    @PostMapping("teachers/courses/{id}/add-homework")
-//    public Course createNewHomework(@RequestBody JsonNode homeworkJson, @PathVariable(value = "id") int courseId)
-//            throws ResourceNotFoundException {
-//        Course course = courseService.getCourseById(courseId);
-//        Collection<Enrollment> enrollmentCollection = course.getEnrollments();
-//        for(Enrollment enrollment : enrollmentCollection) {
-//            Homework homework = new ObjectMapper().convertValue(homeworkJson, Homework.class);
-//            homework.setEnrollment(enrollment);
-//            enrollment.getHomeworks().add(homework);
-//            homeworkService.createHomework(homework);
-//        }
-//        return course;
-//    }
-////
-    @PostMapping("post_event_timetable")
-    public Event postEvent(@RequestBody Event event) {
-        //course_id
-        //time_zone
-        //day
-        return eventRepository.save(event);
     }
 
     //delete event
