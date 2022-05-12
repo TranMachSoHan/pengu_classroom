@@ -51,10 +51,6 @@ public class Homework {
     @Column(name = "submissions")
     private String submissionLink;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "submission_id")
-//    private Submission submission;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "enrollment_id")
     @EqualsAndHashCode.Exclude
@@ -72,7 +68,6 @@ public class Homework {
         this.isPublished = homework.getIsPublished();
         this.isGraded = homework.getIsGraded();
         this.dueDate = homework.getDueDate();
-//        this.submission = homework.getSubmission();
         this.enrollment = homework.getEnrollment();
         this.submissionLink = homework.getSubmissionLink();
     }

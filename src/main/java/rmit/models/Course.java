@@ -59,8 +59,6 @@ public class Course {
         this.teacher = course.getTeacher();
     }
 
-
-
     public Course(){}
 
     public Course(int id, String title, Date startTime, Date endTime, String courseCode,
