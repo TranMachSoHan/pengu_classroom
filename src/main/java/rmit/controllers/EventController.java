@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 @RequestMapping("/api/v1/")
 public class EventController {
     @Autowired
