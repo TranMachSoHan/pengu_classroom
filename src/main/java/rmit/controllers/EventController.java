@@ -51,8 +51,8 @@ public class EventController {
         return eventRepository.save(event);
     }
 
-    @PostMapping("events/{id}/add_newEvent")
-    public Course createNewEvent(@RequestBody JsonNode eventJson, @PathVariable(value = "id") int courseId)
+    @PostMapping("events/{course_id}/add_newEvent")
+    public Course createNewEvent(@RequestBody JsonNode eventJson, @PathVariable(value = "course_id") int courseId)
             throws ResourceNotFoundException {
         Course course = courseService.getCourseById(courseId);
         Event event = new ObjectMapper().convertValue(eventJson, Event.class);

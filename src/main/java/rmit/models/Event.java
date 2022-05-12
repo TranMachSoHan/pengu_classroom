@@ -1,5 +1,6 @@
 package rmit.models;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "events")
 public class Event {
     @Id
@@ -19,29 +21,6 @@ public class Event {
     @Column(name = "timezone", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private TimeZoneType timeZoneType;
-
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    };
-
-    public String getDay(){
-        return day;
-    }
-
-    public void setDay(){
-        this.day = day;
-    }
-
-    public TimeZoneType getZone(){
-        return timeZoneType;
-    }
-
-    public void setTimeZone(TimeZoneType zone){
-        this.timeZoneType = zone;
-    }
 
     @ManyToOne
     @JoinColumn(name="course_id")
