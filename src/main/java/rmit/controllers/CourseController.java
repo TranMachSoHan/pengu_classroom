@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.models.Enrollment;
+import rmit.models.Event;
 import rmit.models.Student;
 import rmit.repositories.CourseRepository;
 import rmit.service.CourseService;
@@ -41,6 +42,12 @@ public class CourseController {
     @PostMapping("courses")
     public Course createCourse(@RequestBody Course course){
         return courseService.createCourse(course);
+    }
+
+    @GetMapping("courses/get_timetable/{id}")
+    public ResponseEntity<Collection<Event>> getStudentTimetable(@PathVariable(value = "id") int courseId)
+            throws ResourceNotFoundException {
+        return ResponseEntity.ok().body(courseService.getAllEventByCourseId(courseId));
     }
 
     //update course
