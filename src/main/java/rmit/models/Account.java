@@ -5,33 +5,36 @@ import lombok.Data;
 import org.json.JSONObject;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Account {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotBlank
     private String username;
 
+    @NotBlank
     private String password;
 
     private String profile_picture;
 
     @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private ERole roles ;
 
     public Account(){}
 
 
-    public Account(int id, String username, String password, String profile_picture, Role role) {
-        this.id = id;
+    public Account(String username, String password) {
         this.username = username;
         this.password = password;
-        this.profile_picture = profile_picture;
-        this.role = role;
     }
 
     @Override
@@ -51,44 +54,4 @@ public abstract class Account {
     }
 
 
-
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUser_name(String username) {
-//        this.username = username;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public String getProfile_picture() {
-//        return profile_picture;
-//    }
-//
-//    public void setProfile_picture(String profile_picture) {
-//        this.profile_picture = profile_picture;
-//    }
-//
-//    public Role getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(Role role) {
-//        this.role = role;
-//    }
 }

@@ -29,7 +29,7 @@ public class Student extends Account {
 
 
     public Student(int id, String username, String password, String profile_picture, float average_mark, String nickname, List<Enrollment> enrollmentList, String studentId) {
-        super(id, username, password, profile_picture, Role.STUDENT);
+//        super(id, username, password, profile_picture, ERole.STUDENT);
         this.average_mark = average_mark;
         this.nickname = nickname;
         this.enrollmentList = enrollmentList;
