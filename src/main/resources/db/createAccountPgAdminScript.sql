@@ -112,32 +112,32 @@ VALUES (31, 'a', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.
 
  INSERT INTO public.events(
      id, day, timezone, course_id)
- VALUES (80, 'Monday', 'II', 50);
+ VALUES (80, 'MON', 'II', 50);
 
  INSERT INTO public.events(
      id, day, timezone, course_id)
- VALUES (81, 'Monday', 'III', 50);
+ VALUES (81, 'MON', 'III', 50);
 
 INSERT INTO public.events(
      id, day, timezone, course_id)
- VALUES (82, 'Monday', 'IV', 50);
+ VALUES (82, 'MON', 'IV', 50);
 
  INSERT INTO public.events(
       id, day, timezone, course_id)
-  VALUES (83, 'Wednesday', 'III', 50);
+  VALUES (83, 'WED', 'III', 50);
 
  INSERT INTO public.events(
      id, day, timezone, course_id)
- VALUES (84, 'Monday', 'III', 51);
+ VALUES (84, 'MON', 'III', 51);
 
  INSERT INTO public.events(
      id, day, timezone, course_id)
- VALUES (85, 'Monday', 'III', 51);
+ VALUES (85, 'MON', 'III', 51);
 
   INSERT INTO public.events(
       id, day, timezone, course_id)
-  VALUES (86, 'Monday', 'III', 52);
+  VALUES (86, 'MON', 'III', 52);
 
    INSERT INTO public.events(
        id, day, timezone, course_id)
-   VALUES (87, 'Monday', 'III', 54);
+   VALUES (87, 'MON', 'III', 54);

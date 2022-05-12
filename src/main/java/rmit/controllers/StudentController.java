@@ -97,7 +97,7 @@ public class StudentController {
                 Map<String, Object> responseEvent = new HashMap<>();
                 responseEvent.put("id", ee.getId());
                 responseEvent.put("day", ee.getDay());
-                responseEvent.put("timezone", ee.getZone());
+                responseEvent.put("timezone", ee.getTimeZoneType());
                 detail_event_list.add(responseEvent);
             }
             response.put("detail_event",detail_event_list );

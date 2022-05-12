@@ -6,13 +6,13 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 
 
 @JsonIgnoreProperties({"course"})
 @Entity
 @Data
 @Table(name = "events")
+@JsonIgnoreProperties({"course"})
 public class Event {
     @Id
     @Column(name = "id", nullable = false)
