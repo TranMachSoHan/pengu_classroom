@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.exceptions.ResourceNotFoundException;
-import rmit.models.Account;
-import rmit.models.Course;
+import rmit.models.*;
 import rmit.repositories.AccountRepository;
 import rmit.repositories.StudentRepository;
 import rmit.service.AccountService;
+import rmit.service.StudentService;
+import rmit.service.TeacherService;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -20,6 +21,12 @@ import java.util.Map;
 public class AccountController {
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private TeacherService teacherService;
 
     @GetMapping("accounts")
     public List<Account> getAllEmployees() {
@@ -38,7 +45,18 @@ public class AccountController {
 //    }
 
     @PostMapping("accounts/signup")
-    public Account signUp( @RequestBody Account account) {return accountService.createAccount(account);}
+    public Account signUp( @RequestBody Account account) {
+        if (account.getRole().equals("STUDENT")) {
+            Student student = new Student(
+                    account.getId(), account.getUsername(),
+                    account.getPassword(), account.getProfile_picture());
+            return studentService.createStudent(student);
+        }
+        Teacher teacher = new Teacher(
+                account.getId(), account.getUsername(),
+                account.getPassword(), account.getProfile_picture());
+        return teacherService.createTeacher(teacher);
+    }
 
     @PutMapping("accounts/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable(value = "id") Integer accountId,

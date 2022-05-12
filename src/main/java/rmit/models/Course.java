@@ -44,6 +44,12 @@ public class Course {
     @ToString.Exclude
     private Teacher teacher;
 
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Collection<Event> events;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Collection<Enrollment> enrollments;
+
     public void updateCourse(Course course){
         this.startTime = course.getStartTime();
         this.endTime = course.getEndTime();
@@ -53,11 +59,7 @@ public class Course {
         this.teacher = course.getTeacher();
     }
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Collection<Event> events;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Collection<Enrollment> enrollments;
 
     public Course(){}
 

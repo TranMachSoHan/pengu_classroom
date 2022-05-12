@@ -96,7 +96,27 @@ VALUES (23, 'C1', 50, 4);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
-VALUES (24, 'C1', 50, 6);
+VALUES (24, 'C1', 51, 5);
+
+INSERT INTO public.enrollments(
+    id, course_code, course_id, student_id)
+VALUES (25, 'C1', 52, 5);
+
+INSERT INTO public.enrollments(
+    id, course_code, course_id, student_id)
+VALUES (26, 'C1', 50, 6);
+
+INSERT INTO public.enrollments(
+    id, course_code, course_id, student_id)
+VALUES (27, 'C1', 50, 6);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
+VALUES (30, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 5.0, null, 'a', 23);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
+VALUES (31, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.5, null, 'a', 23);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
@@ -106,11 +126,15 @@ VALUES (25, 'C1', 50, 5);
 
 INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (30, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 5.0, null, 'a', 20);
+VALUES (32, 'c', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 5.0, null, 'a', 20);
 
 INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (31, 'a', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.0, null, 'a', 21);
+VALUES (33, 'd', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 8.0, null, 'a', 20);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
+VALUES (34, 'a', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.0, null, 'a', 21);
 
  INSERT INTO public.events(
      id, day, end_time, start_time, timezone, course_id)
