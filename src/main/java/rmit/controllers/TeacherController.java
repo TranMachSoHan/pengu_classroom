@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.repositories.*;
 import rmit.service.CourseService;
+import rmit.service.EnrollmentService;
 import rmit.service.TeacherService;
 
 import java.util.*;
@@ -23,6 +24,9 @@ public class TeacherController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
 
     //get teacher
     @GetMapping("teachers")
@@ -93,52 +97,18 @@ public class TeacherController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("teachers/get_timetable/{teacher_id}")
-    public ResponseEntity<List<Map<String, Object>>> getTeacherTimetable(@PathVariable(value = "teacher_id") int accountId)
-            throws ResourceNotFoundException {
-        Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
-        List<Map<String, Object>> list = new ArrayList<>();
-
-        for (Course c : courses) {
-            int courseId = c.getId();
-            List<Map<String, Object>> eventList = new ArrayList<>();
-            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
-            Map<String, Object> courseResponse = new HashMap<>();
-
-            courseResponse.put("courseTitle", c.getTitle());
-            for (Event e : events){
-                Map<String, Object> eventResponse = new HashMap<>();
-                eventResponse.put("id", e.getId());
-                eventResponse.put("day", e.getDay());
-                eventResponse.put("timezone", e.getZone());
-                eventList.add(eventResponse);
-            }
-            courseResponse.put("details_event:",eventList);
-            list.add(courseResponse);
-        }
-        return ResponseEntity.ok().body(list);
+    //invite student
+    @PutMapping("teachers/courses/{course_id}/add-student")
+    public ResponseEntity<Course> inviteStudentToCourse(@PathVariable(value = "course_id") int courseId,
+                                                        @RequestBody Student student) throws ResourceNotFoundException {
+        Course course = courseService.getCourseById(courseId);
+        Enrollment enrollment = new Enrollment();
+        enrollment.setStudent(student);
+        enrollment.setCourse(course);
+        enrollment.setCourseCode(course.getCourseCode());
+        course.getEnrollments().add(enrollment);
+        enrollmentService.createEnrollment(enrollment);
+        courseService.updateCourse(courseId, course);
+        return ResponseEntity.ok().body(course);
     }
-
-    //get the teacher's timetable
-//    @GetMapping("teachers/get_timetable/{teacher_id}")
-//    public JSONArray getTeacherTimetable(@PathVariable(value = "teacher_id") Integer accountId)
-//            throws ResourceNotFoundException {
-//        Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for(Course c : courses){ //EXAMPLE: 3 ENROLL -> 3 COURSE
-//            JSONObject jsonObjectCourse = new JSONObject();
-//            int courseId = c.getId(); // REQUIRE THE COURSE ID
-//            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
-//
-//            for(Event ee : events) {
-//                JSONObject jsonObjectEvent = new JSONObject();
-//                jsonObjectEvent.put("courseName", c.getTitle());
-//                jsonObjectEvent.put("day", ee.getDay());
-//                jsonObjectEvent.put("timeZone", ee.getZone());
-//                jsonArray.put(jsonObjectEvent);
-//            }
-//        }
-//        return jsonArray;
-//    }
 }

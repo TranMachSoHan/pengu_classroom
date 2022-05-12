@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.models.Enrollment;
+import rmit.models.Homework;
 import rmit.models.Student;
 import rmit.repositories.CourseRepository;
 import rmit.service.CourseService;
+import rmit.service.StudentService;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @EnableSwagger2
@@ -23,6 +26,9 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private StudentService studentService;
 
     //get courses
     @GetMapping("courses")
@@ -67,8 +73,8 @@ public class CourseController {
     }
 
     //view all students of that course
-    @GetMapping("courses/{id}/all-students")
-    public ResponseEntity<List<Student>> getAllStudentsByCourse(@PathVariable("id") int courseId)
+    @GetMapping({"students/courses/{id}/all-students","teachers/courses/{id}/all-students"})
+    public ResponseEntity<List<Student>> getAllStudentsByCourse(@PathVariable(value = "id") int courseId)
             throws ResourceNotFoundException {
         Course course = courseService.getCourseById(courseId);
         Collection<Enrollment> enrollmentCollection = course.getEnrollments();
@@ -77,5 +83,20 @@ public class CourseController {
             studentList.add(e.getStudent());
         }
         return ResponseEntity.ok(studentList);
+    }
+
+    //view all homeworks of one student in specific course
+    @GetMapping("courses/{course_id}/students/{student_id}/all-homeworks")
+    public ResponseEntity<List<Homework>> getAllHomeworksByStudentIdAndCourseId(
+            @PathVariable(value = "course_id") int courseId,
+            @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException {
+        Course course = courseService.getCourseById(courseId);
+        Student student = studentService.getStudentById(studentId);
+        List<Enrollment> enrollmentList = course.getEnrollments().stream()
+                .filter(student.getEnrollments()::contains)
+                .collect(Collectors.toList());
+        if(enrollmentList.isEmpty()) return ResponseEntity.ok().body(new ArrayList<>());
+        Enrollment enrollment = enrollmentList.get(0);
+        return ResponseEntity.ok().body(new ArrayList<>(enrollment.getHomeworks()));
     }
 }

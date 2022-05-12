@@ -27,7 +27,7 @@ public class S3Controller {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("homeworks/{id}/upload")
+    @PostMapping("homeworks/{id}/upload-file")
     public String upload(@RequestParam("file")MultipartFile multipartFile,
                          @PathVariable("id") int homeworkId) throws ResourceNotFoundException {
         Homework homework = homeworkService.getHomeworkById(homeworkId);
@@ -35,8 +35,8 @@ public class S3Controller {
         return s3Service.saveSubmission(multipartFile,homework);
     }
 
-    @PostMapping("accounts/{id}/upload")
-    public String uploadProfilePic(@RequestParam("file")MultipartFile multipartFile,
+    @PostMapping("accounts/{id}/upload-profile-picture")
+    public String uploadProfilePic(@RequestParam("picture")MultipartFile multipartFile,
                                    @PathVariable("id") int accountId) throws ResourceNotFoundException {
         Account account = accountService.getAccountById(accountId);
         return s3Service.saveProfilePicture(multipartFile,account);

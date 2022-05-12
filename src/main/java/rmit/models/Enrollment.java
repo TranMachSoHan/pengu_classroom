@@ -45,43 +45,11 @@ public class Enrollment {
         this.homeworks = homeworks;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
-
-    public Collection<Homework> getHomework() {
-        return homeworks;
-    }
-
-    public void setHomeworks(Collection<Homework> homeworks) {
-        this.homeworks = homeworks;
-    }
-
     public void updateEnrollment(Enrollment enrollment) {
         this.id = enrollment.getId();
         this.student = enrollment.getStudent();
         this.courseCode = enrollment.getCourseCode();
-        this.homeworks = enrollment.getHomework();
+        this.homeworks = enrollment.getHomeworks();
     }
 }
 
