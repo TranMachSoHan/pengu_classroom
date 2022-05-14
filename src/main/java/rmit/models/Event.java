@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "events")
-@JsonIgnoreProperties({"course"})
 public class Event {
     @Id
     @Column(name = "id", nullable = false)
