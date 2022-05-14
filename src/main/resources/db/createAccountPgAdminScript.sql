@@ -84,57 +84,63 @@ VALUES (20, 'C1', 50, 3);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
-VALUES (21, 'C2', 51, 4);
+VALUES (21, 'C2', 51, 3);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
-VALUES (22, 'C1', 51, 3);
+VALUES (22, 'C1', 50, 4);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
-VALUES (23, 'C1', 50, 4);
+VALUES (23, 'C2', 51, 4);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
-VALUES (24, 'C1', 51, 5);
+VALUES (24, 'C1', 50, 5);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
-VALUES (25, 'C1', 52, 5);
+VALUES (25, 'C1', 50, 6);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
-VALUES (26, 'C1', 50, 6);
+VALUES (26, 'C2', 51, 6);
 
 INSERT INTO public.enrollments(
     id, course_code, course_id, student_id)
-VALUES (27, 'C1', 50, 6);
+VALUES (27, 'C2', 51, 5);
 
 INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (30, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 5.0, null, 'a', 23);
+VALUES (30, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 6.0, null, 'a', 20);
 
 INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (31, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.5, null, 'a', 23);
-
-INSERT INTO public.enrollments(
-    id, course_code, course_id, student_id)
-VALUES (25, 'C1', 50, 5);
-
-
+VALUES (31, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 6.5, null, 'a', 22);
 
 INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (32, 'c', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 5.0, null, 'a', 20);
+VALUES (32, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 7.5, null, 'a', 24);
 
 INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (33, 'd', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 8.0, null, 'a', 20);
+VALUES (33, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 9.5, null, 'a', 25);
 
 INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (34, 'a', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.0, null, 'a', 21);
+VALUES (34, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.0, null, 'a', 20);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
+VALUES (35, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.5, null, 'a', 22);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
+VALUES (36, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 7.5, null, 'a', 24);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
+VALUES (37, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 9.5, null, 'a', 25);
 
  INSERT INTO public.events(
      id, day, end_time, start_time, timezone, course_id)

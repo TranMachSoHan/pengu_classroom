@@ -71,6 +71,11 @@ public class StudentController {
         return response;
     }
 
+    //student input course code to attend course
+//    @PutMapping("students/{id}/attend-new-course")
+//    public Course attendNewCourseByCourseCode(@PathVariable(value = "id") int)
+
+
     @GetMapping("students/get_timetable/{student_id}")
     public ResponseEntity<List<Map<String, Object>>> getStudentTimetable(@PathVariable(value = "student_id") int accountId)
             throws ResourceNotFoundException {

@@ -99,4 +99,33 @@ public class CourseController {
         Enrollment enrollment = enrollmentList.get(0);
         return ResponseEntity.ok().body(new ArrayList<>(enrollment.getHomeworks()));
     }
+
+    //view all homeworks of that course
+    @GetMapping("courses/{course_id}/all-homeworks")
+    public ResponseEntity<List<Map<String,Object>>> getAllHomeworkInCourse(
+            @PathVariable(value="course_id") int courseId) throws ResourceNotFoundException {
+        Course course = courseService.getCourseById(courseId);
+        List<Map<String, Object>> response = new ArrayList<>();
+        if (course.getEnrollments().size() == 0) {
+            Map<String, Object> responseMessage = new HashMap<>();
+            responseMessage.put("message", "There is no students in this course");
+            response.add(responseMessage);
+            return ResponseEntity.ok().body(response);
+        }
+        //get all enrollments in course
+        List<Enrollment> enrollmentList = new ArrayList<>(course.getEnrollments());
+        //get all homework by one enrollment
+        List<Homework> homeworkList = new ArrayList<>(enrollmentList.get(0).getHomeworks());
+        for (Homework homework : homeworkList) {
+            Map<String, Object> customHomeworkResponse = new HashMap<>();
+            customHomeworkResponse.put("id", homework.getId());
+            customHomeworkResponse.put("title", homework.getTitle());
+            customHomeworkResponse.put("description", homework.getDescription());
+            customHomeworkResponse.put("homeworkType", homework.getHomeworkType());
+            customHomeworkResponse.put("isPublished", homework.getIsPublished());
+            customHomeworkResponse.put("dueDate", homework.getDueDate());
+            response.add(customHomeworkResponse);
+        }
+        return ResponseEntity.ok().body(response);
+    }
 }

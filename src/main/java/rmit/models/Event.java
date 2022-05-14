@@ -25,6 +25,7 @@ public class Event {
     private String day;
 
     @Column(name = "timezone", nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private timezone zone;
 
     @ManyToOne
