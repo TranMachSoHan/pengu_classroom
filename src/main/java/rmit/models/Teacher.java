@@ -22,8 +22,9 @@ public class Teacher extends Account {
         this.courses=courses;
     }
 
-    public Teacher(int id, String username, String password, String profile_picture) {
-        super(id, username, password, profile_picture, Role.TEACHER);
+    public Teacher(String username, String password) {
+        super(username, password);
+        this.setRoles(ERole.TEACHER);
     }
 }
 

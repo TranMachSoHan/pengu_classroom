@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rmit.models.Account;
 import rmit.models.ERole;
+import rmit.models.Student;
+import rmit.models.Teacher;
 import rmit.payload.request.LoginRequest;
 import rmit.payload.request.SignupRequest;
 import rmit.payload.response.JwtResponse;
@@ -68,17 +70,21 @@ public class AuthController {
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
         // Create new user's account
-        Account user = new Account(signUpRequest.getUsername(),
-                encoder.encode(signUpRequest.getPassword()));
+        Account user = null;
         String strRoles = signUpRequest.getRole();
-        user.setRoles(ERole.valueOf(strRoles));
+
         switch (strRoles) {
             case "STUDENT":
-
+                user = new Student(signUpRequest.getUsername(),
+                        encoder.encode(signUpRequest.getPassword()));
                 break;
             case "TEACHER":
+                user = new Teacher(signUpRequest.getUsername(),
+                        encoder.encode(signUpRequest.getPassword()));
                 break;
         }
+
+        assert user != null;
         accountRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

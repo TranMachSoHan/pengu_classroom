@@ -44,19 +44,19 @@ public class AccountController {
 //        return ResponseEntity.ok().body(accountService.getAccountByUsername(username));
 //    }
 
-    @PostMapping("accounts/signup")
-    public Account signUp( @RequestBody Account account) {
-        if (account.getRole().equals("STUDENT")) {
-            Student student = new Student(
-                    account.getId(), account.getUsername(),
-                    account.getPassword(), account.getProfile_picture());
-            return studentService.createStudent(student);
-        }
-        Teacher teacher = new Teacher(
-                account.getId(), account.getUsername(),
-                account.getPassword(), account.getProfile_picture());
-        return teacherService.createTeacher(teacher);
-    }
+
+//    @PostMapping("accounts/signup")
+//    public Account signUp( @RequestBody Account account) {
+//        if (account.getRole().equals("STUDENT")) {
+//            Student student = new Student(account.getUsername(),
+//                    account.getPassword());
+//            return studentService.createStudent(student);
+//        }
+//        Teacher teacher = new Teacher(
+//                account.getId(), account.getUsername(),
+//                account.getPassword(), account.getProfile_picture());
+//        return teacherService.createTeacher(teacher);
+//    }
 
     @PutMapping("accounts/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable(value = "id") Integer accountId,
