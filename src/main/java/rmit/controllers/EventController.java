@@ -11,9 +11,7 @@ import rmit.models.Event;
 import rmit.service.CourseService;
 import rmit.repositories.CourseRepository;
 import rmit.repositories.EventRepository;
-import springfox.documentation.spring.web.json.Json;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
