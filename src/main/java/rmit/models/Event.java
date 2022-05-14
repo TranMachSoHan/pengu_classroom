@@ -1,5 +1,6 @@
 package rmit.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@JsonIgnoreProperties({"course"})
 @Table(name = "events")
 public class Event {
     @Id

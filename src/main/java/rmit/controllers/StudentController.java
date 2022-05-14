@@ -1,5 +1,6 @@
 package rmit.controllers;
 
+import com.fasterxml.jackson.databind.node.TextNode;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class StudentController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
 
     @GetMapping("students")
     public List<Student> getAllStudents() {
@@ -71,9 +75,17 @@ public class StudentController {
         return response;
     }
 
-    //student input course code to attend course
-//    @PutMapping("students/{id}/attend-new-course")
-//    public Course attendNewCourseByCourseCode(@PathVariable(value = "id") int)
+    @PutMapping("students/{student_id}/insert-course-code")
+    public ResponseEntity<Course> updateStudentIntoCourse(@PathVariable(value = "student_id") int studentId,
+                                        @RequestBody Map<String,String> courseCode)throws ResourceNotFoundException {
+        Student student = studentService.getStudentById(studentId);
+        System.out.println(courseCode.get("courseCode"));
+//        Enrollment enroll = enrollmentService.createEnrollment(accountId);
+        Enrollment enrollment = new Enrollment();
+        enrollment.setStudent(student);
+        return ResponseEntity.ok().body(courseService.addNewEnrollmentToCourse(courseCode
+                .get("courseCode"), enrollment));
+    }
 
 
     @GetMapping("students/get_timetable/{student_id}")
