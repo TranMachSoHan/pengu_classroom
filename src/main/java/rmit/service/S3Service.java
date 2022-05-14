@@ -99,8 +99,6 @@ public class S3Service implements FileServiceImpl{
         }
     }
 
-
-
     @Override
     public byte[] downloadFile(String filename) {
         S3Object s3object = s3.getObject(bucketName, filename);
@@ -138,21 +136,5 @@ public class S3Service implements FileServiceImpl{
     private String generateName(MultipartFile multipartFile) {
         return new Date().getTime() + "-" + multipartFile.getOriginalFilename().replace(" ","_");
     }
-
-//    private MediaType contentType(String filename) {
-//        String[] fileArrSplit = filename.split("\\.");
-//        String fileExtension = fileArrSplit[fileArrSplit.length - 1];
-//        switch (fileExtension) {
-//            case "txt":
-//                return MediaType.TEXT_PLAIN;
-//            case "png":
-//                return MediaType.IMAGE_PNG;
-//            case "jpg":
-//                return MediaType.IMAGE_JPEG;
-//            default:
-//                return MediaType.APPLICATION_OCTET_STREAM;
-//        }
-//    }
-
 
 }

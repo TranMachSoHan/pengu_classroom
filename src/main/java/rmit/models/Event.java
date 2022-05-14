@@ -1,5 +1,7 @@
 package rmit.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -7,6 +9,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Data
+@JsonIgnoreProperties({"course"})
 @Table(name = "events")
 public class Event {
     @Id
@@ -20,53 +24,29 @@ public class Event {
     private Date endTime;
 
     @Column(name = "day", nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private DayType day;
+    private String day;
 
     @Column(name = "timezone", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private TimeZoneType timeZoneType;
-
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    };
-
-    public Date getStartTime() {
-        return startTime;
-    }
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public DayType getDay(){
-        return day;
-    }
-
-    public void setDay(DayType day){
-        this.day = day;
-    }
-
-    public TimeZoneType getZone(){
-        return timeZoneType;
-    }
-
-    public void setTimeZone(TimeZoneType zone){
-        this.timeZoneType = zone;
-    }
+    private timezone zone;
 
     @ManyToOne
     @JoinColumn(name="course_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Course course;
+
+
+    public enum timezone{
+        I,
+        II,
+        III,
+        IV,
+        V,
+        VI,
+        VII;
+    }
+
+
+
 }
