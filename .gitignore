@@ -30,6 +30,7 @@ build/
 
 ### VS Code ###
 .vscode/
+target/*
 target/docker/image-id
 target/docker/image-name
 target/docker/repository
@@ -95,4 +96,3 @@ target/classes/rmit/service/EnrollmentService.class
 target/classes/rmit/service/FileServiceImpl.class
 target/classes/rmit/service/HomeworkService.class
 target/classes/rmit/service/S3Service.class
-target/*

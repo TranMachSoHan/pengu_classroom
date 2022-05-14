@@ -4,7 +4,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import rmit.models.Account;
 import rmit.models.Homework;
 import rmit.repositories.AccountRepository;
 import rmit.repositories.HomeworkRepository;
-
 
 import java.io.*;
 import java.util.Date;
@@ -40,6 +38,27 @@ public class S3Service implements FileServiceImpl{
         this.s3 = s3;
     }
 
+//    @Override
+//    public String saveSubmission(MultipartFile multipartFile, Homework homework) {
+//        String filename = generateName(multipartFile);
+//        String extension = multipartFile.getOriginalFilename().split("\\.")[1];
+//        try {
+//            File convertedFile = convertMultipartToFile(multipartFile);
+//            PutObjectRequest putObjectRequest;
+//            if (extension.equals("pdf")) {
+//                putObjectRequest =  new PutObjectRequest(bucketName, "submission/" + filename, convertedFile)
+//                        .withCannedAcl(CannedAccessControlList.PublicRead);
+//            } else {
+//                putObjectRequest = new PutObjectRequest(bucketName, "profile-picture/" + filename, convertedFile)
+//                        .withCannedAcl(CannedAccessControlList.PublicRead);
+//            }
+//            s3.putObject(putObjectRequest);
+//            return "Successfully upload the file " + filename;
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
     @Override
     public String saveSubmission(MultipartFile multipartFile, Homework homework) {
         String filename = generateName(multipartFile);
@@ -50,12 +69,12 @@ public class S3Service implements FileServiceImpl{
         homeworkRepository.save(homework);
         try {
             File convertedFile = convertMultipartToFile(multipartFile);
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, "submission/" + filename, convertedFile)
+            PutObjectRequest putObjectRequest =  new PutObjectRequest(bucketName, "submission/" + filename, convertedFile)
                     .withCannedAcl(CannedAccessControlList.PublicRead);
             s3.putObject(putObjectRequest);
             return "Successfully upload the submission " + filename;
         } catch (IOException e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -79,6 +98,7 @@ public class S3Service implements FileServiceImpl{
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public byte[] downloadFile(String filename) {
         S3Object s3object = s3.getObject(bucketName, filename);

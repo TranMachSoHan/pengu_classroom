@@ -41,7 +41,7 @@ public class HomeworkController {
 
     @PutMapping("homeworks/{id}")
     public ResponseEntity<Homework> updateHomework(@PathVariable(value = "id") int homeworkId,
-                                               @RequestBody Homework homeworkDetails) throws ResourceNotFoundException {
+                                                   @RequestBody Homework homeworkDetails) throws ResourceNotFoundException {
         return ResponseEntity.ok(homeworkService.updateHomework(homeworkId,homeworkDetails));
     }
 
@@ -62,7 +62,7 @@ public class HomeworkController {
     //edit description of homework
     @PutMapping("homeworks/{id}/description")
     public ResponseEntity<Homework> updateHomeworkDescription(@PathVariable(value = "id") int homeworkId,
-                                                   @RequestBody String newDescription) throws ResourceNotFoundException {
+                                                              @RequestBody String newDescription) throws ResourceNotFoundException {
         return ResponseEntity.ok(this.homeworkService.editDescriptionHomework(homeworkId, newDescription));
     }
 
