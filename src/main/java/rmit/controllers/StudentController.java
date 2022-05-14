@@ -22,6 +22,8 @@ public class StudentController {
     private StudentService studentService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private EnrollmentService enrollmentService;
 
     @GetMapping("students")
     public List<Student> getAllStudents() {
@@ -34,20 +36,7 @@ public class StudentController {
         return ResponseEntity.ok().body(studentService.getStudentById(accountId));
     }
 
-//    @GetMapping("students/{id}/get_student_courses")
-//    public JSONArray getAllStudentCourse(@PathVariable(value = "id") int student_id)
-//            throws ResourceNotFoundException {
-//        Collection<Enrollment> enroll = studentService.getEnrollmentByStudent(student_id);
-//        JSONArray jsonArray = new JSONArray();
-//        for (Enrollment e : enroll) { //EXAMPLE: 3 ENROLL -> 3 COURSE
-//            JSONObject jsonObjectCourse = new JSONObject();
-//            jsonObjectCourse.put("courseTitle", e.getCourse());
-//            jsonArray.put(jsonObjectCourse);
-//        }
-//        return jsonArray;
-//    }
-
-    @GetMapping("students/{id}/get_student_courses")
+    @GetMapping("students/{id}/get-student-courses")
     public ResponseEntity<List<Map<String, Object>>> getStudentCourses(@PathVariable(value = "id") int accountId)
             throws ResourceNotFoundException {
         Collection<Enrollment> enroll = studentService.getEnrollmentByStudent(accountId);
@@ -81,7 +70,7 @@ public class StudentController {
         return response;
     }
 
-    @GetMapping("students/get_timetable/{student_id}")
+    @GetMapping("students/get-timetable/{student_id}")
     public ResponseEntity<List<Map<String, Object>>> getStudentTimetable(@PathVariable(value = "student_id") int accountId)
             throws ResourceNotFoundException {
         Collection<Enrollment> enroll = studentService.getEnrollmentByStudent(accountId);
@@ -106,54 +95,25 @@ public class StudentController {
         return ResponseEntity.ok().body(list);
     }
 
+    @PutMapping("students/{student_id}/student-insert-course-code")
+    public void updateStudentIntoCourse(@PathVariable(value = "student_id") int accountId,
+                                          @RequestBody Object courseCode)throws ResourceNotFoundException {
+        Student student = studentService.getStudentById(accountId);
+        Enrollment enrollment = new Enrollment();
+        enrollment.setStudent(student);
+        enrollment.setCourseCode(courseCode.toString());
+        Collection<Course> course = courseService.getAllCourses();
+        for (Course c : course) {
+            if (c.getCourseCode() == courseCode) {
+                enrollment.setCourse(c);
+                c.getEnrollments().add(enrollment);
+            }
+        }
+    }
+
 }
 //    @GetMapping("students/{id}/enrollments")
 //    public ResponseEntity<Collection<Enrollment>> getStudentEnrollment(@PathVariable(value = "id") Integer accountId
 //                     throws ResourceNotFoundException {
 //        return ResponseEntity.ok().body(studentService.getEnrollmentByStudent(accountId));
-//    }
-
-
-
-
-//events = [
-//        {
-//        'course_name': 'EnterpriseApplication',
-//        'detail_event' :[
-//        {
-//        'id':1,
-//        'day':'MON',
-//        'time_zone' : 'I',
-//        },
-//        {
-//        'id':2,
-//        'day':'FRI',
-//        'time_zone' : 'II',
-//        }
-//        ],
-//        }
-//        ]
-
-
-//    @GetMapping("students/get_timetable/{student_id}")
-//    public JSONArray getStudentTimetable(@PathVariable(value = "student_id") Integer accountId)
-//            throws ResourceNotFoundException {
-//        Collection<Enrollment> enroll = studentService.getEnrollmentByStudent(accountId);
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for(Enrollment e : enroll){ //EXAMPLE: 3 ENROLL -> 3 COURSE
-//            JSONObject jsonObjectCourse = new JSONObject();
-//            jsonObjectCourse.put("courseName", e.getCourse().getTitle());
-//            int courseId = e.getCourse().getId(); // REQUIRE THE COURSE ID FROM ENROLLMENT
-//            jsonArray.put(jsonObjectCourse);
-//            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
-//            for(Event ee : events) {
-//                JSONObject jsonObjectEvent = new JSONObject();
-//                jsonObjectEvent.put("id", ee.getId());
-//                jsonObjectEvent.put("day", ee.getDay());
-//                jsonObjectEvent.put("timeZone", ee.getZone());
-//                jsonArray.put(jsonObjectEvent);
-//            }
-//        }
-//        return jsonArray;
 //    }
