@@ -1,8 +1,0 @@
-{
-    "id": 1,
-    "username" : "user2",
-    "password" : "123",
-    "profile_picture": "1",
-    "role": "TEACHER",
-    "courses": []
-}

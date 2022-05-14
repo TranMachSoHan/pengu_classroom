@@ -51,15 +51,31 @@ public class Homework {
     @Column(name = "submissions")
     private String submissionLink;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "submission_id")
-//    private Submission submission;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "enrollment_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Enrollment enrollment;
+
+    public Homework(){}
+
+    public Homework(int id, String title, String description,
+                    float mark, HomeworkType homeworkType, String feedback,
+                    Boolean isSubmitted, Boolean isPublished, Boolean isGraded,
+                    Date dueDate, String submissionLink, Enrollment enrollment) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.mark = mark;
+        this.homeworkType = homeworkType;
+        this.feedback = feedback;
+        this.isSubmitted = isSubmitted;
+        this.isPublished = isPublished;
+        this.isGraded = isGraded;
+        this.dueDate = dueDate;
+        this.submissionLink = submissionLink;
+        this.enrollment = enrollment;
+    }
 
     public void updateHomework(Homework homework) {
         this.id = homework.getId();
@@ -72,7 +88,6 @@ public class Homework {
         this.isPublished = homework.getIsPublished();
         this.isGraded = homework.getIsGraded();
         this.dueDate = homework.getDueDate();
-//        this.submission = homework.getSubmission();
         this.enrollment = homework.getEnrollment();
         this.submissionLink = homework.getSubmissionLink();
     }
