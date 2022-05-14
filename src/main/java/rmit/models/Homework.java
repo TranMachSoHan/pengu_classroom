@@ -57,6 +57,26 @@ public class Homework {
     @ToString.Exclude
     private Enrollment enrollment;
 
+    public Homework(){}
+
+    public Homework(int id, String title, String description,
+                    float mark, HomeworkType homeworkType, String feedback,
+                    Boolean isSubmitted, Boolean isPublished, Boolean isGraded,
+                    Date dueDate, String submissionLink, Enrollment enrollment) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.mark = mark;
+        this.homeworkType = homeworkType;
+        this.feedback = feedback;
+        this.isSubmitted = isSubmitted;
+        this.isPublished = isPublished;
+        this.isGraded = isGraded;
+        this.dueDate = dueDate;
+        this.submissionLink = submissionLink;
+        this.enrollment = enrollment;
+    }
+
     public void updateHomework(Homework homework) {
         this.id = homework.getId();
         this.title = homework.getTitle();

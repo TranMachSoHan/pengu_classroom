@@ -51,6 +51,7 @@ public class CourseService {
         course.getEnrollments().add(enrollment);
         enrollmentRepository.save(enrollment);
         return courseRepository.save(course);
+
     }
 
     public void deleteCourse(int course_id) throws ResourceNotFoundException{

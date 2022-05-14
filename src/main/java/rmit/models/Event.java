@@ -46,7 +46,5 @@ public class Event {
         VI,
         VII;
     }
-
-
-
 }
+

@@ -36,7 +36,7 @@ public class EnrollmentController {
 
     @PutMapping("enrollments/{id}")
     public ResponseEntity<Enrollment> updateEnrollment(@PathVariable(value = "id") Integer enrollmentId,
-                                                       @RequestBody Enrollment enrollmentDetails) throws ResourceNotFoundException {
+                                                  @RequestBody Enrollment enrollmentDetails) throws ResourceNotFoundException {
         return ResponseEntity.ok(this.enrollmentService.updateEnrollment(enrollmentId,enrollmentDetails));
     }
 
