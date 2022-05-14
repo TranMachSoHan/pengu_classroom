@@ -16,7 +16,7 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank

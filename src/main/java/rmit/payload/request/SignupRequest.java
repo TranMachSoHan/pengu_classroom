@@ -6,13 +6,11 @@ import javax.validation.constraints.*;
 
 public class SignupRequest {
     @NotBlank
-    @Size(min = 3, max = 20)
     private String username;
 
     private String role;
 
     @NotBlank
-    @Size(min = 6, max = 40)
     private String password;
 
     public String getUsername() {
