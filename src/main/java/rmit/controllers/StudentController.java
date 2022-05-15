@@ -98,7 +98,7 @@ public class StudentController {
         for (Enrollment e : enroll) {
             Map<String, Object> response = new HashMap<>();
             int courseId = e.getCourse().getId();
-            response.put("courseTitle", e.getCourse().getTitle());
+            response.put("course_name", e.getCourse().getTitle());
             Collection<Event> events = courseService.getAllEventByCourseId(courseId);
             List<Map<String, Object>> detail_event_list = new ArrayList<>();
             for (Event ee : events) {
@@ -108,6 +108,7 @@ public class StudentController {
                 responseEvent.put("timeZoneType", ee.getTimeZoneType());
                 detail_event_list.add(responseEvent);
             }
+            response.put("detail_event", detail_event_list);
             list.add(response);
         }
         return ResponseEntity.ok().body(list);
