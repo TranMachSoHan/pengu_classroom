@@ -25,12 +25,11 @@ public class StudentController {
 
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private EnrollmentService enrollmentService;
 
     @Autowired
     private AccountService accountService;
-
-    @Autowired
-    private EnrollmentService enrollmentService;
 
     @GetMapping("students")
 //    @PreAuthorize("hasAuthority('STUDENT')")
@@ -101,54 +100,33 @@ public class StudentController {
             int courseId = e.getCourse().getId();
             response.put("courseTitle", e.getCourse().getTitle());
             Collection<Event> events = courseService.getAllEventByCourseId(courseId);
+            List<Map<String, Object>> detail_event_list = new ArrayList<>();
             for (Event ee : events) {
-                response.put("nickname", ee.getId());
-                response.put("id", ee.getDay());
-                response.put("homeworkList", ee.getZone());
+                Map<String, Object> responseEvent = new HashMap<>();
+                responseEvent.put("id", ee.getId());
+                responseEvent.put("day", ee.getDay());
+                responseEvent.put("timeZoneType", ee.getTimeZoneType());
+                detail_event_list.add(responseEvent);
             }
             list.add(response);
         }
         return ResponseEntity.ok().body(list);
     }
 
-//    //get all homework by student ID
-//    @GetMapping("students/{id}/all-homeworks")
-//    public ResponseEntity<List<Collection<Homework>>> getAllHomeworksByStudentID(@PathVariable(value="id") int studentId)
-//        throws ResourceNotFoundException {
-//        List<Collection<Homework>> response = new ArrayList<>();
-//        Student student = studentService.getStudentById(studentId);
-//        List<Enrollment> enrollmentList = student.getEnrollmentList();
-//        for(Enrollment e : enrollmentList) {
-//            response.add(e.getHomeworks());
-//        }
-//        return ResponseEntity.ok().body(response);
-//    }
-
+    @PutMapping("students/{student_id}/student-insert-course-code")
+    public void updateStudentIntoCourse(@PathVariable(value = "student_id") int accountId,
+                                          @RequestBody Object courseCode)throws ResourceNotFoundException {
+        Student student = studentService.getStudentById(accountId);
+        Enrollment enrollment = new Enrollment();
+        enrollment.setStudent(student);
+        enrollment.setCourseCode(courseCode.toString());
+        Collection<Course> course = courseService.getAllCourses();
+        for (Course c : course) {
+            if (c.getCourseCode() == courseCode) {
+                enrollment.setCourse(c);
+                c.getEnrollments().add(enrollment);
+            }
+        }
+    }
 
 }
-//    @GetMapping("students/{id}/enrollments")
-//    public ResponseEntity<Collection<Enrollment>> getStudentEnrollment(@PathVariable(value = "id") Integer accountId
-//                     throws ResourceNotFoundException {
-//        return ResponseEntity.ok().body(studentService.getEnrollmentByStudent(accountId));
-//    }
-
-
-
-
-//events = [
-//        {
-//        'course_name': 'EnterpriseApplication',
-//        'detail_event' :[
-//        {
-//        'id':1,
-//        'day':'MON',
-//        'time_zone' : 'I',
-//        },
-//        {
-//        'id':2,
-//        'day':'FRI',
-//        'time_zone' : 'II',
-//        }
-//        ],
-//        }
-//        ]
