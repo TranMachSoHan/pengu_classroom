@@ -32,7 +32,7 @@ public class StudentService {
     public Collection<Enrollment> getEnrollmentByStudent(Integer studentId) throws ResourceNotFoundException {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + studentId));
-        return student.getEnrollmentList();
+        return student.getEnrollments();
     }
 
     public Student updateStudent(Integer studentId, Student student) throws ResourceNotFoundException {

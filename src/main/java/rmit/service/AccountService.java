@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Account;
-import rmit.models.Role;
 import rmit.repositories.AccountRepository;
 
 import java.util.List;

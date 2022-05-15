@@ -1,5 +1,5 @@
 package rmit.models;
 
-public enum Role {
+public enum ERole {
     STUDENT, TEACHER;
 }

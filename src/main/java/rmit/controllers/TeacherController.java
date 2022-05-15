@@ -2,6 +2,7 @@ package rmit.controllers;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.*;
@@ -10,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.repositories.*;
 import rmit.service.CourseService;
-import rmit.service.StudentService;
+import rmit.service.EnrollmentService;
 import rmit.service.TeacherService;
 
 import java.util.*;
@@ -26,16 +27,18 @@ public class TeacherController {
     private CourseService courseService;
 
     @Autowired
-    private StudentService studentService;
+    private EnrollmentService enrollmentService;
 
     //get teacher
     @GetMapping("teachers")
+//    @PreAuthorize("hasAuthority('TEACHER')")
     public List<Teacher> getAllTeachers() {
         return teacherService.getAllTeachers();
     }
 
     //get teacher by id
     @GetMapping("teachers/{id}")
+//    @PreAuthorize("hasAuthority('TEACHER')")
     public ResponseEntity<Teacher> getTeacherById(@PathVariable(value = "id") int teacher_id)
             throws ResourceNotFoundException {
         return ResponseEntity.ok().body(teacherService.getTeacherById(teacher_id));
@@ -153,4 +156,19 @@ public class TeacherController {
 //        Enrollment enrollment = enrollmentList.get(0);
 //        return ResponseEntity.ok().body(new ArrayList<>(enrollment.getHomeworks()));
 //    }
+
+    //invite student
+    @PutMapping("teachers/courses/{course_id}/add-student")
+    public ResponseEntity<Course> inviteStudentToCourse(@PathVariable(value = "course_id") int courseId,
+                                                        @RequestBody Student student) throws ResourceNotFoundException {
+        Course course = courseService.getCourseById(courseId);
+        Enrollment enrollment = new Enrollment();
+        enrollment.setStudent(student);
+        enrollment.setCourse(course);
+        enrollment.setCourseCode(course.getCourseCode());
+        course.getEnrollments().add(enrollment);
+        enrollmentService.createEnrollment(enrollment);
+        courseService.updateCourse(courseId, course);
+        return ResponseEntity.ok().body(course);
+    }
 }
