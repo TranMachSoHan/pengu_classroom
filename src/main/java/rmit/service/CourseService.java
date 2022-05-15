@@ -3,16 +3,12 @@ package rmit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rmit.exceptions.ResourceNotFoundException;
-import rmit.models.Course;
-import rmit.models.Enrollment;
-import rmit.models.Event;
-import rmit.models.Student;
+import rmit.models.*;
 import rmit.repositories.CourseRepository;
 import rmit.repositories.EnrollmentRepository;
 import rmit.repositories.StudentRepository;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CourseService {
@@ -72,5 +68,22 @@ public class CourseService {
         Collection<Enrollment> enrolls = course.getEnrollments();
         Collection<Student> students = null;
         return students;
+    }
+
+    public List<Map<String,Object>> getAllSubmittedHomework(String titleHw, Integer course_id) throws ResourceNotFoundException{
+        Collection<Object[]> objList = courseRepository.findSubmittedHomework(titleHw,course_id);
+        List<Map<String,Object>>  response = new ArrayList<>();
+        for(Object[] object: objList){
+            Map<String, Object> map = new HashMap<>();
+            Homework homework = (Homework) object[0];
+            Student student = (Student) object[1];
+            map.put("student",student);
+            map.put("homework",homework);
+            response.add(map);
+            System.out.println(homework);
+            System.out.println(student);
+        }
+        System.out.println(response);
+        return response;
     }
 }
