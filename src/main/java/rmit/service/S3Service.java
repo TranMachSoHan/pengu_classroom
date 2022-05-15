@@ -14,6 +14,7 @@ import rmit.repositories.AccountRepository;
 import rmit.repositories.HomeworkRepository;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -71,6 +72,8 @@ public class S3Service implements FileServiceImpl{
                     .withCannedAcl(CannedAccessControlList.PublicRead);
             s3.putObject(putObjectRequest);
             homework.setSubmissionLink(fileLink);
+            homework.setSubmissionTime(new Date());
+            homework.setIsSubmitted(true);
             homeworkRepository.save(homework);
             return "Successfully upload the submission " + filename;
         } catch (IOException e) {
