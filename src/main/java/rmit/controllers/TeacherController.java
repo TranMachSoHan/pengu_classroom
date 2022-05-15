@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.repositories.*;
 import rmit.service.CourseService;
+import rmit.service.StudentService;
 import rmit.service.TeacherService;
 
 import java.util.*;
@@ -23,6 +24,9 @@ public class TeacherController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private StudentService studentService;
 
     //get teacher
     @GetMapping("teachers")
@@ -83,7 +87,7 @@ public class TeacherController {
         List<Map<String, Object>> list = new ArrayList<>();
         Collection<Enrollment> enrollmentCollection = course.getEnrollments();
         for (Enrollment enrollment : enrollmentCollection) {
-            Map<String,Object> response = new HashMap<>();
+            Map<String, Object> response = new HashMap<>();
             Student student = enrollment.getStudent();
             response.put("nickname", student.getNickname());
             response.put("id", student.getStudentId());
@@ -106,39 +110,41 @@ public class TeacherController {
             Map<String, Object> courseResponse = new HashMap<>();
 
             courseResponse.put("courseTitle", c.getTitle());
-            for (Event e : events){
+            for (Event e : events) {
                 Map<String, Object> eventResponse = new HashMap<>();
                 eventResponse.put("id", e.getId());
                 eventResponse.put("day", e.getDay());
                 eventResponse.put("timezone", e.getTimeZoneType());
                 eventList.add(eventResponse);
             }
-            courseResponse.put("details_event:",eventList);
+            courseResponse.put("details_event:", eventList);
             list.add(courseResponse);
         }
         return ResponseEntity.ok().body(list);
     }
 
-    //get the teacher's timetable
-//    @GetMapping("teachers/get_timetable/{teacher_id}")
-//    public JSONArray getTeacherTimetable(@PathVariable(value = "teacher_id") Integer accountId)
-//            throws ResourceNotFoundException {
-//        Collection<Course> courses = teacherService.getAllTeachingCourses(accountId);
-//        JSONArray jsonArray = new JSONArray();
+
+//    @PutMapping("teachers/courses/{course_id}/students/{student_id}")
+//    public Course deleteStudentFromCourse(
+//            @PathVariable(value = "course_id") int courseId,
+//            @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException{
+//        Course course = courseService.getCourseById(courseId);
+//        Collection<Student> students = courseService;
+//    }
+
+
 //
-//        for(Course c : courses){ //EXAMPLE: 3 ENROLL -> 3 COURSE
-//            JSONObject jsonObjectCourse = new JSONObject();
-//            int courseId = c.getId(); // REQUIRE THE COURSE ID
-//            Collection<Event> events = courseService.getAllEventByCourseId(courseId);
-//
-//            for(Event ee : events) {
-//                JSONObject jsonObjectEvent = new JSONObject();
-//                jsonObjectEvent.put("courseName", c.getTitle());
-//                jsonObjectEvent.put("day", ee.getDay());
-//                jsonObjectEvent.put("timeZone", ee.getZone());
-//                jsonArray.put(jsonObjectEvent);
-//            }
-//        }
-//        return jsonArray;
+//    @GetMapping("courses/{course_id}/students/{student_id}/all-homeworks")
+//    public ResponseEntity<List<Homework>> getAllHomeworksByStudentIdAndCourseId(
+//            @PathVariable(value = "course_id") int courseId,
+//            @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException {
+//        Course course = courseService.getCourseById(courseId);
+//        Student student = studentService.getStudentById(studentId);
+//        List<Enrollment> enrollmentList = course.getEnrollments().stream()
+//                .filter(student.getEnrollments()::contains)
+//                .collect(Collectors.toList());
+//        if(enrollmentList.isEmpty()) return ResponseEntity.ok().body(new ArrayList<>());
+//        Enrollment enrollment = enrollmentList.get(0);
+//        return ResponseEntity.ok().body(new ArrayList<>(enrollment.getHomeworks()));
 //    }
 }

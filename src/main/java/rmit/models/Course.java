@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Entity
 @Data
-@JsonIgnoreProperties({"teacher"})
+@JsonIgnoreProperties({"teacher", "events"})
 @Table(name = "courses")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Course {

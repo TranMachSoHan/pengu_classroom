@@ -3,15 +3,19 @@ package rmit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rmit.exceptions.ResourceNotFoundException;
+import rmit.models.Course;
 import rmit.models.Enrollment;
 import rmit.repositories.EnrollmentRepository;
-
+import rmit.repositories.CourseRepository;
 import java.util.List;
 
 @Service
 public class EnrollmentService {
     @Autowired
     private EnrollmentRepository enrollmentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     public List<Enrollment> getAllEnrollments(){
         return this.enrollmentRepository.findAll();
@@ -40,4 +44,10 @@ public class EnrollmentService {
                 .orElseThrow(()-> new ResourceNotFoundException("Enrollment not found for this id :: " + enrollment_id));
         this.enrollmentRepository.delete(enrollment);
     }
+
+//    public float getAvgMark(int course_id) throws ResourceNotFoundException{
+//        Course course = courseRepository.findById(course_id).
+//                orElseThrow(()-> new ResourceNotFoundException("Enrollment not found for this id :: " + course_id));
+//
+//    }
 }

@@ -8,7 +8,6 @@ import lombok.ToString;
 import javax.persistence.*;
 
 
-@JsonIgnoreProperties({"course"})
 @Entity
 @Data
 @Table(name = "events")

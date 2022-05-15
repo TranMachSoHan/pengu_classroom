@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Course;
+import rmit.models.Enrollment;
 import rmit.models.Event;
+import rmit.models.Student;
 import rmit.repositories.CourseRepository;
 
 import java.util.Collection;
@@ -47,5 +49,13 @@ public class CourseService {
         Course course = courseRepository.findById(course_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found for this id :: " + course_id));
         return course.getEvents();
+    }
+
+    public Collection<Student> getAllStudentByCourseId(Integer course_id) throws ResourceNotFoundException{
+        Course course = courseRepository.findById(course_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found for this id :: " + course_id));
+        Collection<Enrollment> enrolls = course.getEnrollments();
+        Collection<Student> students = null;
+        return students;
     }
 }
