@@ -8,6 +8,7 @@ import rmit.models.Enrollment;
 import rmit.models.Event;
 import rmit.models.Student;
 import rmit.repositories.CourseRepository;
+import rmit.repositories.StudentRepository;
 
 import java.util.Collection;
 import java.util.List;
@@ -52,10 +53,14 @@ public class CourseService {
     }
 
     public Collection<Student> getAllStudentByCourseId(Integer course_id) throws ResourceNotFoundException{
+        Collection<Student> students = null;
         Course course = courseRepository.findById(course_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found for this id :: " + course_id));
         Collection<Enrollment> enrolls = course.getEnrollments();
-        Collection<Student> students = null;
+        for(Enrollment e : enrolls){
+           Student student = e.getStudent();
+           students.add(student);
+        }
         return students;
     }
 }

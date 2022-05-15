@@ -124,13 +124,19 @@ public class TeacherController {
     }
 
 
-//    @PutMapping("teachers/courses/{course_id}/students/{student_id}")
-//    public Course deleteStudentFromCourse(
-//            @PathVariable(value = "course_id") int courseId,
-//            @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException{
-//        Course course = courseService.getCourseById(courseId);
-//        Collection<Student> students = courseService;
-//    }
+    @PutMapping("teachers/courses/{course_id}/students/{student_id}")
+    public Course deleteStudentFromCourse(
+            @PathVariable(value = "course_id") int courseId,
+            @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException{
+        Course course = courseService.getCourseById(courseId);
+        Collection<Student> students = courseService.getAllStudentByCourseId(courseId);
+        for (Student s : students){
+            if (s.getId() == studentId){
+
+            }
+        }
+        return course;
+    }
 
 
 //
