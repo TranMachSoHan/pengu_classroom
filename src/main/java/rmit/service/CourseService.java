@@ -78,7 +78,7 @@ public class CourseService {
             Homework homework = (Homework) object[0];
             Student studentId = (Student) object[1];
             hm.put("homework", homework);
-            hm.put("studentID",studentId);
+            hm.put("student",studentId);
             response.add(hm);
         }
         return response;

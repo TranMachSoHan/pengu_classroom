@@ -173,4 +173,15 @@ public class TeacherController {
         List<Map<String,Object>> response = courseService.getAllSubmittedHomework(title.get("title"), courseId);
         return ResponseEntity.ok().body(response);
     }
+
+    //mark one homework of student
+    @PutMapping("teachers/courses/homeworks/{id}/mark-homework")
+    public ResponseEntity<Homework> markHomework(@PathVariable(value = "id") int homeworkId,
+                                                 @RequestBody Map<String, String> markAndFeedBack)
+            throws ResourceNotFoundException {
+        Float mark = Float.parseFloat(markAndFeedBack.get("mark"));
+        String feedback = markAndFeedBack.get("feedback");
+        return ResponseEntity.ok().body(teacherService.markHomework(homeworkId,mark,feedback));
+    }
+
 }
