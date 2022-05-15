@@ -126,9 +126,9 @@ public class TeacherController {
         return ResponseEntity.ok().body(list);
     }
 
-
+    //Remove a student from the course
     @PutMapping("teachers/courses/{course_id}/students/{student_id}")
-    public Course deleteStudentFromCourse(
+    public ResponseEntity<Course> deleteStudentFromCourse(
             @PathVariable(value = "course_id") int courseId,
             @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException{
         Course course = courseService.getCourseById(courseId);
@@ -137,9 +137,11 @@ public class TeacherController {
             if(e.getStudent().getId() == studentId) {
                 enrolls.remove(e);
                 course.setEnrollments(enrolls);
+                enrollmentService.deleteEnrollment(e.getId());
+                break;
             }
         }
-        return course;
+        return ResponseEntity.ok().body(course);
     }
 //        Collection<Student> students = courseService.getAllStudentByCourseId(courseId);
 //        for (Student s : students){
