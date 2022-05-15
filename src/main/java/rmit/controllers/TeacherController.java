@@ -114,7 +114,7 @@ public class TeacherController {
                 Map<String, Object> eventResponse = new HashMap<>();
                 eventResponse.put("id", e.getId());
                 eventResponse.put("day", e.getDay());
-                eventResponse.put("timezone", e.getTimeZoneType());
+                eventResponse.put("timeZoneType", e.getTimeZoneType());
                 eventList.add(eventResponse);
             }
             courseResponse.put("details_event:", eventList);
