@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.*;
@@ -32,11 +33,13 @@ public class StudentController {
     private EnrollmentService enrollmentService;
 
     @GetMapping("students")
+//    @PreAuthorize("hasAuthority('STUDENT')")
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
 
     @GetMapping("students/{id}")
+//    @PreAuthorize("hasAuthority('STUDENT')")
     public ResponseEntity<Account> getStudentById(@PathVariable(value = "id") Integer accountId)
             throws ResourceNotFoundException {
         return ResponseEntity.ok().body(studentService.getStudentById(accountId));

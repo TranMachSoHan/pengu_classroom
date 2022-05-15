@@ -2,6 +2,7 @@ package rmit.controllers;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.*;
@@ -30,12 +31,14 @@ public class TeacherController {
 
     //get teacher
     @GetMapping("teachers")
+//    @PreAuthorize("hasAuthority('TEACHER')")
     public List<Teacher> getAllTeachers() {
         return teacherService.getAllTeachers();
     }
 
     //get teacher by id
     @GetMapping("teachers/{id}")
+//    @PreAuthorize("hasAuthority('TEACHER')")
     public ResponseEntity<Teacher> getTeacherById(@PathVariable(value = "id") int teacher_id)
             throws ResourceNotFoundException {
         return ResponseEntity.ok().body(teacherService.getTeacherById(teacher_id));
