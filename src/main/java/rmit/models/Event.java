@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@JsonIgnoreProperties({"course"})
 @Table(name = "events")
 public class Event {
     @Id
