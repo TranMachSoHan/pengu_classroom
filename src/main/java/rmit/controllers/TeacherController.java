@@ -132,14 +132,27 @@ public class TeacherController {
             @PathVariable(value = "course_id") int courseId,
             @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException{
         Course course = courseService.getCourseById(courseId);
-        Collection<Student> students = courseService.getAllStudentByCourseId(courseId);
-        for (Student s : students){
-            if (s.getId() == studentId){
-
+        Collection<Enrollment> enrolls = course.getEnrollments();
+        for(Enrollment e : enrolls){
+            if(e.getStudent().getId() == studentId) {
+                enrolls.remove(e);
+                course.setEnrollments(enrolls);
             }
         }
         return course;
     }
+//        Collection<Student> students = courseService.getAllStudentByCourseId(courseId);
+//        for (Student s : students){
+//            if (s.getId() == studentId){
+//                students.remove(s);
+//                for (Student ss: students){
+//                    ss.getEnrollments();
+//
+//                }
+//            }
+//
+//        }
+
 
 
 //
