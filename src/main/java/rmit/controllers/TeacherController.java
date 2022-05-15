@@ -165,4 +165,12 @@ public class TeacherController {
         courseService.updateCourse(courseId, course);
         return ResponseEntity.ok().body(course);
     }
+
+    //view all submitted homework of one type of homework in that course
+    @GetMapping("teachers/courses/{course_id}/homeworks/submitted")
+    public ResponseEntity<List<Map<String,Object>>> getAllSubmittedHomework(@RequestBody Map<String,String> title,
+                                                                  @PathVariable(value = "course_id") int courseId) {
+        List<Map<String,Object>> response = courseService.getAllSubmittedHomework(title.get("title"), courseId);
+        return ResponseEntity.ok().body(response);
+    }
 }
