@@ -136,4 +136,9 @@ public class CourseController {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping("teachers/courses/{course_id}/homeworks/submitted")
+    public ResponseEntity<List<Map<String,Object>>> getAllSubmittedHomework(@RequestBody Map<String, String> title, @PathVariable(value = "course_id") int course_id) throws ResourceNotFoundException{
+        List<Map<String,Object>> response = courseService.getAllSubmittedHomework(title.get("title"),course_id);
+        return ResponseEntity.ok().body(response);
+    }
 }
