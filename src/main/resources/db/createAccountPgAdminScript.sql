@@ -1,30 +1,30 @@
 INSERT INTO public.account(
-    id, password, profile_picture,role, username)
-VALUES (1, '123', '123','TEACHER','teacher1');
+    password, profile_picture,roles, username)
+VALUES ('123', '123456','TEACHER','teacher1');
 
 INSERT INTO public.account(
-    id, password, profile_picture, role, username)
-VALUES (2, '123', '123', 'TEACHER', 'teacher2');
+    password, profile_picture, roles, username)
+VALUES ('123', '123456', 'TEACHER', 'teacher2');
 
 INSERT INTO public.account(
-    id, password, profile_picture, role, username)
-VALUES (3, '123', '123', 'STUDENT', 'student1');
+    password, profile_picture, roles, username)
+VALUES ('123', '123', 'STUDENT', 'student1');
 
 INSERT INTO public.account(
-    id, password, profile_picture,role, username)
-VALUES (4, '123', '123', 'STUDENT', 'student2');
+    password, profile_picture,roles, username)
+VALUES ('123', '123', 'STUDENT', 'student2');
 
 INSERT INTO public.account(
-    id, password, profile_picture, role, username)
-VALUES (5, '123', '123', 'STUDENT', 'student3');
+    password, profile_picture, roles, username)
+VALUES ('123', '123', 'STUDENT', 'student3');
 
 INSERT INTO public.account(
-    id, password, profile_picture, role, username)
-VALUES (6, '123', '123', 'STUDENT', 'student4');
+    password, profile_picture, roles, username)
+VALUES ('123', '123', 'STUDENT', 'student4');
 
 INSERT INTO public.account(
-    id, password, profile_picture, role, username)
-VALUES (7, '123', '123', 'STUDENT', 'student5');
+    password, profile_picture, roles, username)
+VALUES ('123', '123', 'STUDENT', 'student5');
 
 INSERT INTO public.students(
     average_mark, nickname, student_id, id)

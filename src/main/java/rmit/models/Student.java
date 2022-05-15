@@ -30,8 +30,9 @@ public class Student extends Account {
     private Collection<Enrollment> enrollments;
 
 
-    public Student(int id, String username, String password, String profile_picture, float average_mark, String nickname, Collection<Enrollment> enrollments, String studentId) {
-        super(id, username, password, profile_picture, Role.STUDENT);
+    public Student(int id, String username, String password, String profile_picture, float average_mark, String nickname, List<Enrollment> enrollmentList, String studentId) {
+//        super(id, username, password, profile_picture, ERole.STUDENT);
+
         this.average_mark = average_mark;
         this.nickname = nickname;
         this.enrollments = enrollments;
@@ -41,7 +42,8 @@ public class Student extends Account {
     public Student() {
     }
 
-    public Student(int id, String username, String password, String profile_picture) {
-        super(id, username, password, profile_picture, Role.STUDENT);
+    public Student(String username, String password) {
+        super(username, password);
+        this.setRoles(ERole.STUDENT);
     }
 }

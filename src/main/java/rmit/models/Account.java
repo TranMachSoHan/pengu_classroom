@@ -7,35 +7,35 @@ import lombok.Data;
 import org.json.JSONObject;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Account {
+public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank
     private String username;
 
+    @NotBlank
     private String password;
 
     private String profile_picture;
 
     @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private ERole roles ;
 
     public Account(){}
 
 
-    public Account(int id, String username, String password, String profile_picture, Role role) {
-        this.id = id;
+    public Account(String username, String password) {
         this.username = username;
         this.password = password;
-        this.profile_picture = profile_picture;
-        this.role = role;
     }
 
     @Override
