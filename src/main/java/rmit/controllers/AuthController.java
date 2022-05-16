@@ -76,11 +76,11 @@ public class AuthController {
         switch (strRoles) {
             case "STUDENT":
                 user = new Student(signUpRequest.getUsername(),
-                        encoder.encode(signUpRequest.getPassword()));
+                        encoder.encode(signUpRequest.getPassword()),signUpRequest.getNickName());
                 break;
             case "TEACHER":
                 user = new Teacher(signUpRequest.getUsername(),
-                        encoder.encode(signUpRequest.getPassword()));
+                        encoder.encode(signUpRequest.getPassword()),signUpRequest.getTitle());
                 break;
         }
 

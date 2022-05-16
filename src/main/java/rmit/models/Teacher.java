@@ -14,6 +14,9 @@ public class Teacher extends Account {
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private Collection<Course> courses;
 
+    @Column(name = "title", nullable = true)
+    private String title;
+
     public Teacher() {
 
     }
@@ -22,9 +25,10 @@ public class Teacher extends Account {
         this.courses=courses;
     }
 
-    public Teacher(String username, String password) {
+    public Teacher(String username, String password, String title) {
         super(username, password);
         this.setRoles(ERole.TEACHER);
+        this.title = title;
     }
 }
 

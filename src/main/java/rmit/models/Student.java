@@ -42,8 +42,9 @@ public class Student extends Account {
     public Student() {
     }
 
-    public Student(String username, String password) {
+    public Student(String username, String password,String nickname ) {
         super(username, password);
         this.setRoles(ERole.STUDENT);
+        this.nickname = nickname;
     }
 }

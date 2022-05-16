@@ -10,6 +10,10 @@ public class SignupRequest {
 
     private String role;
 
+    private String title;
+
+    private String nickName;
+
     @NotBlank
     private String password;
 
@@ -31,6 +35,14 @@ public class SignupRequest {
 
     public String getRole() {
         return this.role;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getNickName() {
+        return nickName;
     }
 
     public void setRole(String role) {

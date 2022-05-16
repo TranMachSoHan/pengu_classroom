@@ -11,7 +11,6 @@ public class LoginRequest {
     @NotBlank
     private String password;
 
-    private String role;
 
     public String getUsername() {
         return username;
@@ -29,7 +28,4 @@ public class LoginRequest {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
 }
