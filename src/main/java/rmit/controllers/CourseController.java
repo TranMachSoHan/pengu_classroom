@@ -93,57 +93,7 @@ public class CourseController {
         return ResponseEntity.ok(studentList);
     }
 
-    //view all homeworks of one student in specific course
-    @GetMapping("courses/{course_id}/students/{student_id}/all-homeworks")
-    public ResponseEntity<List<Homework>> getAllHomeworksByStudentIdAndCourseId(
-            @PathVariable(value = "course_id") int courseId,
-            @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException {
-        Course course = courseService.getCourseById(courseId);
-        Student student = studentService.getStudentById(studentId);
-        List<Enrollment> enrollmentList = course.getEnrollments().stream()
-                .filter(student.getEnrollments()::contains)
-                .collect(Collectors.toList());
-        if(enrollmentList.isEmpty()) return ResponseEntity.ok().body(new ArrayList<>());
-        Enrollment enrollment = enrollmentList.get(0);
-        return ResponseEntity.ok().body(new ArrayList<>(enrollment.getHomeworks()));
-    }
 
-    //view all homeworks of that course
-    @GetMapping("courses/{course_id}/all-homeworks")
-    public ResponseEntity<Map<String,List<Map<String,Object>>>> getAllHomeworkInCourse(
-            @PathVariable(value="course_id") int courseId) throws ResourceNotFoundException {
-        Course course = courseService.getCourseById(courseId);
-        Map<String,List<Map<String,Object>>> response = new HashMap<>();
-        Map<String,Object> hm = new HashMap<>();
-        //if no student in that class
-        if (course.getEnrollments().size() == 0) {
-            List<Map<String, Object>> homeworkInfo = new ArrayList<>();
-            hm.put("futureHomework","no homework");
-            hm.put("pastHomework","no homework");
-            homeworkInfo.add(hm);
-            response.put("error", homeworkInfo);
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
-        }
-        //get all enrollments in course
-        List<Enrollment> enrollmentList = new ArrayList<>(course.getEnrollments());
-        //get all homework by one enrollment
-        List<Homework> homeworkList = new ArrayList<>(enrollmentList.get(0).getHomeworks());
-        List<Map<String, Object>> futureHomeworkList = new ArrayList<>();
-        List<Map<String, Object>> pastHomeworkList = new ArrayList<>();
-        for (Homework homework : homeworkList) {
-            Map<String, Object> customHomeworkResponse = new HashMap<>();
-            customHomeworkResponse.put("id", homework.getId());
-            customHomeworkResponse.put("title", homework.getTitle());
-            customHomeworkResponse.put("description", homework.getDescription());
-            customHomeworkResponse.put("homeworkType", homework.getHomeworkType());
-            customHomeworkResponse.put("isPublished", homework.getIsPublished());
-            customHomeworkResponse.put("dueDate", homework.getDueDate());
-            if(homework.getDueDate().after(new Date()) || homework.getDueDate().equals(new Date())) {
-                futureHomeworkList.add(customHomeworkResponse);
-            } else pastHomeworkList.add(customHomeworkResponse);
-        }
-        response.put("futureHomework", futureHomeworkList);
-        response.put("pastHomework",pastHomeworkList);
-        return ResponseEntity.ok().body(response);
-    }
+
+
 }

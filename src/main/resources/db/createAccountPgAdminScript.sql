@@ -1,30 +1,30 @@
 INSERT INTO public.account(
-    password, profile_picture,roles, username)
-VALUES ('123', '123456','TEACHER','teacher1');
+    password, profile_picture,roles, username, email, birthday, phone_number)
+VALUES ('123', '123456','TEACHER','teacher1', 'account1@gmail.com', '2000-02-12', '+84039478182');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123456', 'TEACHER', 'teacher2');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123456', 'TEACHER', 'teacher2', 'account2@gmail.com', '2000-02-13', '+840394232382');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123', 'STUDENT', 'student1');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student1', 'account3@gmail.com', '2000-02-14', '+840232382');
 
 INSERT INTO public.account(
-    password, profile_picture,roles, username)
-VALUES ('123', '123', 'STUDENT', 'student2');
+    password, profile_picture,roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student2', 'account4@gmail.com', '2000-05-12', '+84032438182');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123', 'STUDENT', 'student3');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student3', 'account5@gmail.com', '2000-06-12', '+8303934382');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123', 'STUDENT', 'student4');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student4', 'account6@gmail.com', '2000-07-12', '+8403942432482');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123', 'STUDENT', 'student5');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student5', 'account7@gmail.com', '2000-08-12', '+840392318182');
 
 INSERT INTO public.students(
     average_mark, nickname, student_id, id)
