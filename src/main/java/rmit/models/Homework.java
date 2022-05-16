@@ -1,6 +1,7 @@
 package rmit.models;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,8 +27,8 @@ public class Homework {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "marks", nullable = false)
-    private float mark;
+    @Column(name = "marks")
+    private Float mark;
 
     @Column(name = "type", nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -46,10 +47,16 @@ public class Homework {
     private Boolean isGraded;
 
     @Column(name = "dueDate", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date dueDate;
 
     @Column(name = "submissions")
     private String submissionLink;
+
+    @Column(name= "submissionTime")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private Date submissionTime;
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "enrollment_id")
@@ -70,5 +77,6 @@ public class Homework {
         this.dueDate = homework.getDueDate();
         this.enrollment = homework.getEnrollment();
         this.submissionLink = homework.getSubmissionLink();
+        this.submissionTime = homework.getSubmissionTime();
     }
 }

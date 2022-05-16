@@ -47,9 +47,4 @@ public class EnrollmentService {
         this.enrollmentRepository.delete(enrollment);
     }
 
-//    public float getAvgMark(int course_id) throws ResourceNotFoundException{
-//        Course course = courseRepository.findById(course_id).
-//                orElseThrow(()-> new ResourceNotFoundException("Enrollment not found for this id :: " + course_id));
-//
-//    }
 }

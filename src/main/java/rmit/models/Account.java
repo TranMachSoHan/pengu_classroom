@@ -1,6 +1,7 @@
 package rmit.models;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
@@ -27,6 +28,13 @@ public class Account {
 
     private String profile_picture;
 
+    private String email;
+
+    private String phoneNumber;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date birthday;
+
     @Enumerated(value = EnumType.STRING)
     private ERole roles ;
 
@@ -52,6 +60,9 @@ public class Account {
         this.username = account.getUsername();
         this.password = account.getPassword();
         this.profile_picture = account.getProfile_picture();
+        this.email = account.getEmail();
+        this.birthday = account.getBirthday();
+        this.phoneNumber = account.getPhoneNumber();
     }
 
     public String generateAccountID() {

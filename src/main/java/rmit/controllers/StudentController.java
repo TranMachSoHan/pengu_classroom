@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +12,8 @@ import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.*;
 import rmit.service.*;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -128,6 +126,32 @@ public class StudentController {
                 c.getEnrollments().add(enrollment);
             }
         }
+    }
+
+    //view all homeworks of one student in specific course
+    @GetMapping("students/{student_id}/courses/{course_id}/all-homeworks")
+    public ResponseEntity<Map<String,List<Homework>>> getAllHomeworksByStudentIdAndCourseId(
+            @PathVariable(value = "course_id") int courseId,
+            @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException {
+        Map<String,List<Homework>> response = new HashMap<>();
+        //find the common enrollment in course and student attribute
+        Course course = courseService.getCourseById(courseId);
+        Student student = studentService.getStudentById(studentId);
+        List<Enrollment> commonEnrollment = course.getEnrollments().stream()
+                .filter(student.getEnrollments()::contains)
+                .collect(Collectors.toList());
+        if(commonEnrollment.size() == 0) return ResponseEntity.ok().body(response);
+        List<Homework> homeworkList = new ArrayList<>(commonEnrollment.get(0).getHomeworks());
+        List<Homework> futureHomeworkList = new ArrayList<>();
+        List<Homework> pastHomeworkList = new ArrayList<>();
+        for (Homework homework : homeworkList) {
+            if(homework.getDueDate().after(new Date()) || homework.getDueDate().equals(new Date())) {
+                futureHomeworkList.add(homework);
+            } else pastHomeworkList.add(homework);
+        }
+        response.put("futureHomework", futureHomeworkList);
+        response.put("pastHomework",pastHomeworkList);
+        return ResponseEntity.ok().body(response);
     }
 
 }

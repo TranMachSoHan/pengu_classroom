@@ -9,6 +9,8 @@ import rmit.models.Student;
 import java.util.Collection;
 import java.util.List;
 
+import java.util.Collection;
+
 public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "SELECT c FROM Course c WHERE c.courseCode = ?1")
     public Course findByCourseCode(String courseCode);

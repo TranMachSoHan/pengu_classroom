@@ -1,30 +1,30 @@
 INSERT INTO public.account(
-    password, profile_picture,roles, username)
-VALUES ('123', '123456','TEACHER','teacher1');
+    password, profile_picture,roles, username, email, birthday, phone_number)
+VALUES ('123', '123456','TEACHER','teacher1', 'account1@gmail.com', '2000-02-12', '+84039478182');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123456', 'TEACHER', 'teacher2');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123456', 'TEACHER', 'teacher2', 'account2@gmail.com', '2000-02-13', '+840394232382');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123', 'STUDENT', 'student1');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student1', 'account3@gmail.com', '2000-02-14', '+840232382');
 
 INSERT INTO public.account(
-    password, profile_picture,roles, username)
-VALUES ('123', '123', 'STUDENT', 'student2');
+    password, profile_picture,roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student2', 'account4@gmail.com', '2000-05-12', '+84032438182');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123', 'STUDENT', 'student3');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student3', 'account5@gmail.com', '2000-06-12', '+8303934382');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123', 'STUDENT', 'student4');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student4', 'account6@gmail.com', '2000-07-12', '+8403942432482');
 
 INSERT INTO public.account(
-    password, profile_picture, roles, username)
-VALUES ('123', '123', 'STUDENT', 'student5');
+    password, profile_picture, roles, username, email, birthday, phone_number)
+VALUES ('123', '123', 'STUDENT', 'student5', 'account7@gmail.com', '2000-08-12', '+840392318182');
 
 INSERT INTO public.students(
     average_mark, nickname, student_id, id)
@@ -111,36 +111,52 @@ INSERT INTO public.enrollments(
 VALUES (27, 'C2', 51, 5);
 
 INSERT INTO public.homeworks(
-    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (30, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 6.0, null, 'a', 20);
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (30, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 6.5, 'https://s3.console.aws.amazon.com/s3/object/pengu-classroom?region=ap-southeast-1&prefix=submission/1651337964017-Dynamic_Programming.pdf', '2019-04-28T14:45:15', 'a', 20);
 
 INSERT INTO public.homeworks(
-    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (31, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 6.5, null, 'a', 22);
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (31, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, FALSE, null, null, null, 'a', 22);
 
 INSERT INTO public.homeworks(
-    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (32, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 7.5, null, 'a', 24);
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (32, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, FALSE, null, null, null, 'a', 24);
 
 INSERT INTO public.homeworks(
-    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (33, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, 9.5, null, 'a', 25);
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (33, 'a', '2019-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, FALSE, null, null, null, 'a', 25);
 
 INSERT INTO public.homeworks(
-    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (34, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.0, null, 'a', 20);
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (34, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, null, null,'2019-04-28T14:45:15', 'ab', 20);
 
 INSERT INTO public.homeworks(
-    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (35, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 6.5, null, 'a', 22);
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (35, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, null, null, '2019-04-28T14:45:15', 'ab', 22);
 
 INSERT INTO public.homeworks(
-    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (36, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 7.5, null, 'a', 24);
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (36, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, null, null,'2019-04-28T14:45:15', 'ab', 24);
 
 INSERT INTO public.homeworks(
-    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, titles, enrollment_id)
-VALUES (37, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, 9.5, null, 'a', 25);
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (37, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, null, null,'2019-04-28T14:45:15', 'ab', 25);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (38, 'c', '2023-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, null, null,null, 'abc', 20);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (39, 'c', '2023-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, null, null, null, 'abc', 22);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (40, 'c', '2023-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, null, null,null, 'abc', 24);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (41, 'c', '2023-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, null, null,null, 'abc', 25);
 
 INSERT INTO public.events(
     id, day, timezone, course_id)

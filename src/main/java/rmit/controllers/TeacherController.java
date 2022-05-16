@@ -2,6 +2,7 @@ package rmit.controllers;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import rmit.exceptions.ResourceNotFoundException;
@@ -165,4 +166,48 @@ public class TeacherController {
         courseService.updateCourse(courseId, course);
         return ResponseEntity.ok().body(course);
     }
+
+    //view all submitted homework of one type of homework in that course
+    @GetMapping("teachers/courses/{course_id}/homeworks/submitted")
+    public ResponseEntity<List<Map<String,Object>>> getAllSubmittedHomework(@RequestBody Map<String,String> title,
+                                                                  @PathVariable(value = "course_id") int courseId) {
+        List<Map<String,Object>> response = courseService.getAllSubmittedHomework(title.get("title"), courseId);
+        return ResponseEntity.ok().body(response);
+    }
+
+    //mark one homework of student
+    @PutMapping("teachers/courses/homeworks/{id}/mark-homework")
+    public ResponseEntity<Homework> markHomework(@PathVariable(value = "id") int homeworkId,
+                                                 @RequestBody Map<String, String> markAndFeedBack)
+            throws ResourceNotFoundException {
+        Float mark = Float.parseFloat(markAndFeedBack.get("mark"));
+        String feedback = markAndFeedBack.get("feedback");
+        return ResponseEntity.ok().body(teacherService.markHomework(homeworkId,mark,feedback));
+    }
+
+    //teacher view all homeworks of that course
+    @GetMapping("teachers/courses/{course_id}/all-homeworks")
+    public ResponseEntity<Map<String,List<Homework>>> getAllHomeworkInCourse(
+            @PathVariable(value="course_id") int courseId) throws ResourceNotFoundException {
+        Course course = courseService.getCourseById(courseId);
+        Map<String,List<Homework>> response = new HashMap<>();
+        List<Enrollment> enrollmentList = new ArrayList<>(course.getEnrollments());
+        if(enrollmentList.size() == 0) {
+            response.put("There is no students in this class", new ArrayList<>());
+            return ResponseEntity.ok().body(response);
+        }
+        //get all homework by one enrollment
+        List<Homework> homeworkList = new ArrayList<>(enrollmentList.get(0).getHomeworks());
+        List<Homework> futureHomeworkList = new ArrayList<>();
+        List<Homework> pastHomeworkList = new ArrayList<>();
+        for (Homework homework : homeworkList) {
+            if(homework.getDueDate().after(new Date()) || homework.getDueDate().equals(new Date())) {
+                futureHomeworkList.add(homework);
+            } else pastHomeworkList.add(homework);
+        }
+        response.put("futureHomework", futureHomeworkList);
+        response.put("pastHomework",pastHomeworkList);
+        return ResponseEntity.ok().body(response);
+    }
+
 }

@@ -70,20 +70,17 @@ public class CourseService {
         return students;
     }
 
-    public List<Map<String,Object>> getAllSubmittedHomework(String titleHw, Integer course_id) throws ResourceNotFoundException{
-        Collection<Object[]> objList = courseRepository.findSubmittedHomework(titleHw,course_id);
-        List<Map<String,Object>>  response = new ArrayList<>();
-        for(Object[] object: objList){
-            Map<String, Object> map = new HashMap<>();
+    public List<Map<String,Object>> getAllSubmittedHomework(String title_name, int course_id) {
+        List<Object[]> objectList = new ArrayList<>(courseRepository.findSubmittedHomework(title_name, course_id));
+        List<Map<String,Object>> response = new ArrayList<>();
+        for (Object[] object : objectList) {
+            Map<String,Object> hm = new HashMap<>();
             Homework homework = (Homework) object[0];
-            Student student = (Student) object[1];
-            map.put("student",student);
-            map.put("homework",homework);
-            response.add(map);
-            System.out.println(homework);
-            System.out.println(student);
+            Student studentId = (Student) object[1];
+            hm.put("homework", homework);
+            hm.put("student",studentId);
+            response.add(hm);
         }
-        System.out.println(response);
         return response;
     }
 }
