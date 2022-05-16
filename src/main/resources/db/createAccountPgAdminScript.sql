@@ -142,6 +142,22 @@ INSERT INTO public.homeworks(
     id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
 VALUES (37, 'b', '2019-04-28T14:45:15', 'a', 'ASSIGNMENT', FALSE, TRUE, TRUE, null, null,'2019-04-28T14:45:15', 'ab', 25);
 
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (38, 'c', '2023-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, null, null,null, 'abc', 20);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (39, 'c', '2023-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, null, null, null, 'abc', 22);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (40, 'c', '2023-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, null, null,null, 'abc', 24);
+
+INSERT INTO public.homeworks(
+    id, description, due_date, feedbacks, type, is_graded, is_published, is_submitted, marks, submissions, submission_Time, titles, enrollment_id)
+VALUES (41, 'c', '2023-04-28T14:45:15', 'a', 'EXAM', FALSE, TRUE, TRUE, null, null,null, 'abc', 25);
+
 INSERT INTO public.events(
     id, day, timezone, course_id)
 VALUES (80, 'MON', 'II', 50);

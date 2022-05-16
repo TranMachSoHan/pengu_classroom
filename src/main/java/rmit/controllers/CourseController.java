@@ -1,6 +1,7 @@
 package rmit.controllers;
 
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,20 +110,26 @@ public class CourseController {
 
     //view all homeworks of that course
     @GetMapping("courses/{course_id}/all-homeworks")
-    public ResponseEntity<List<Map<String,Object>>> getAllHomeworkInCourse(
+    public ResponseEntity<Map<String,List<Map<String,Object>>>> getAllHomeworkInCourse(
             @PathVariable(value="course_id") int courseId) throws ResourceNotFoundException {
         Course course = courseService.getCourseById(courseId);
-        List<Map<String, Object>> response = new ArrayList<>();
+        Map<String,List<Map<String,Object>>> response = new HashMap<>();
+        Map<String,Object> hm = new HashMap<>();
+        //if no student in that class
         if (course.getEnrollments().size() == 0) {
-            Map<String, Object> responseMessage = new HashMap<>();
-            responseMessage.put("message", "There is no students in this course");
-            response.add(responseMessage);
-            return ResponseEntity.ok().body(response);
+            List<Map<String, Object>> homeworkInfo = new ArrayList<>();
+            hm.put("futureHomework","no homework");
+            hm.put("pastHomework","no homework");
+            homeworkInfo.add(hm);
+            response.put("error", homeworkInfo);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
         }
         //get all enrollments in course
         List<Enrollment> enrollmentList = new ArrayList<>(course.getEnrollments());
         //get all homework by one enrollment
         List<Homework> homeworkList = new ArrayList<>(enrollmentList.get(0).getHomeworks());
+        List<Map<String, Object>> futureHomeworkList = new ArrayList<>();
+        List<Map<String, Object>> pastHomeworkList = new ArrayList<>();
         for (Homework homework : homeworkList) {
             Map<String, Object> customHomeworkResponse = new HashMap<>();
             customHomeworkResponse.put("id", homework.getId());
@@ -131,14 +138,12 @@ public class CourseController {
             customHomeworkResponse.put("homeworkType", homework.getHomeworkType());
             customHomeworkResponse.put("isPublished", homework.getIsPublished());
             customHomeworkResponse.put("dueDate", homework.getDueDate());
-            response.add(customHomeworkResponse);
+            if(homework.getDueDate().after(new Date()) || homework.getDueDate().equals(new Date())) {
+                futureHomeworkList.add(customHomeworkResponse);
+            } else pastHomeworkList.add(customHomeworkResponse);
         }
-        return ResponseEntity.ok().body(response);
-    }
-
-    @GetMapping("teachers/courses/{course_id}/homeworks/submitted")
-    public ResponseEntity<List<Map<String,Object>>> getAllSubmittedHomework(@RequestBody Map<String, String> title, @PathVariable(value = "course_id") int course_id) throws ResourceNotFoundException{
-        List<Map<String,Object>> response = courseService.getAllSubmittedHomework(title.get("title"),course_id);
+        response.put("futureHomework", futureHomeworkList);
+        response.put("pastHomework",pastHomeworkList);
         return ResponseEntity.ok().body(response);
     }
 }
