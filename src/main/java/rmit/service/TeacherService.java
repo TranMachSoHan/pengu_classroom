@@ -41,7 +41,7 @@ public class TeacherService {
     public Teacher updateTeacher(Integer accountId, Teacher teacher) throws ResourceNotFoundException {
         Teacher account = teacherRepository.findById(accountId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + accountId));
-        account.updateAccount(teacher);
+        account.updateTeacher(teacher);
         final Teacher updatedAccount = teacherRepository.save(account);
         return updatedAccount;
     }

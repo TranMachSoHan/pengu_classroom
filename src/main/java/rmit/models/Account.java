@@ -44,6 +44,9 @@ public class Account {
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
+        this.email="";
+        this.phoneNumber="";
+
     }
 
     @Override
@@ -56,9 +59,7 @@ public class Account {
     }
 
     public void updateAccount(Account account){
-        this.id = account.getId();
         this.username = account.getUsername();
-        this.password = account.getPassword();
         this.profile_picture = account.getProfile_picture();
         this.email = account.getEmail();
         this.birthday = account.getBirthday();

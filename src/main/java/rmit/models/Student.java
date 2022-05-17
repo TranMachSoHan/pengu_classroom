@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -45,6 +46,13 @@ public class Student extends Account {
     public Student(String username, String password,String nickname ) {
         super(username, password);
         this.setRoles(ERole.STUDENT);
-        this.nickname = nickname;
+        if(!Objects.equals(nickname, "") ){
+            this.nickname = nickname;
+        }
+    }
+
+    public void updateStudent(Student student){
+        this.updateAccount(student);
+        this.nickname=student.getNickname();
     }
 }

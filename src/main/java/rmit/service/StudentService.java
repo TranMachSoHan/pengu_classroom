@@ -38,7 +38,7 @@ public class StudentService {
     public Student updateStudent(Integer studentId, Student student) throws ResourceNotFoundException {
         Student account = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found for this id :: " + studentId));
-        account.updateAccount(student);
+        account.updateStudent(student);
         final Student updatedAccount = studentRepository.save(account);
         return updatedAccount;
     }

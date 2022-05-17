@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -28,7 +29,14 @@ public class Teacher extends Account {
     public Teacher(String username, String password, String title) {
         super(username, password);
         this.setRoles(ERole.TEACHER);
-        this.title = title;
+        if(!Objects.equals(title, "")){
+            this.title = title;
+        }
+    }
+
+    public void updateTeacher(Teacher teacher){
+        this.updateAccount(teacher);
+        this.title=teacher.getTitle();
     }
 }
 
