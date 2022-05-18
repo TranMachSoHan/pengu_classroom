@@ -1,7 +1,5 @@
 package rmit.controllers;
 
-import org.json.JSONObject;
-import org.springframework.http.HttpStatus;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.models.Enrollment;
 import rmit.models.Event;
-import rmit.models.Homework;
 import rmit.models.Student;
-import rmit.repositories.CourseRepository;
 import rmit.service.CourseService;
 import rmit.service.StudentService;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @EnableSwagger2

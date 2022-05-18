@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Enrollment;
-import rmit.repositories.EnrollmentRepository;
 import rmit.service.EnrollmentService;
 
 import java.util.HashMap;

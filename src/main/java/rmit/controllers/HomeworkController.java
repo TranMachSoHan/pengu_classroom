@@ -9,7 +9,6 @@ import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.Course;
 import rmit.models.Enrollment;
 import rmit.models.Homework;
-import rmit.repositories.CourseRepository;
 import rmit.service.CourseService;
 import rmit.service.HomeworkService;
 

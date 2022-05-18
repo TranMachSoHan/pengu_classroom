@@ -5,13 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.exceptions.ResourceNotFoundException;
 import rmit.models.*;
-import rmit.repositories.AccountRepository;
-import rmit.repositories.StudentRepository;
 import rmit.service.AccountService;
 import rmit.service.StudentService;
 import rmit.service.TeacherService;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
