@@ -16,6 +16,7 @@ import rmit.service.S3Service;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/v1/")
 public class S3Controller {
     @Autowired
