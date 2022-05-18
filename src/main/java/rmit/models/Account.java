@@ -59,8 +59,6 @@ public class Account {
     }
 
     public void updateAccount(Account account){
-        this.username = account.getUsername();
-        this.profile_picture = account.getProfile_picture();
         this.email = account.getEmail();
         this.birthday = account.getBirthday();
         this.phoneNumber = account.getPhoneNumber();

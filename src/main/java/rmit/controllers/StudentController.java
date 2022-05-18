@@ -60,6 +60,7 @@ public class StudentController {
         return studentService.createStudent(student);
     }
 
+    @CrossOrigin
     @PutMapping("students/{id}")
     public ResponseEntity<Account> updateStudent(@PathVariable(value = "id") Integer accountId,
                                                  @RequestBody Student student) throws ResourceNotFoundException {
