@@ -137,7 +137,11 @@ public class StudentController {
         List<Enrollment> commonEnrollment = course.getEnrollments().stream()
                 .filter(student.getEnrollments()::contains)
                 .collect(Collectors.toList());
-        if(commonEnrollment.size() == 0) return ResponseEntity.ok().body(response);
+        if(commonEnrollment.size() == 0) {
+            response.put("futureHomework", new ArrayList<>());
+            response.put("pastHomework", new ArrayList<>());
+            return ResponseEntity.ok().body(response);
+        }
         List<Homework> homeworkList = new ArrayList<>(commonEnrollment.get(0).getHomeworks());
         List<Homework> futureHomeworkList = new ArrayList<>();
         List<Homework> pastHomeworkList = new ArrayList<>();

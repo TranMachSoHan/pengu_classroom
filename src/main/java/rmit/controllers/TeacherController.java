@@ -193,7 +193,8 @@ public class TeacherController {
         Map<String,List<Homework>> response = new HashMap<>();
         List<Enrollment> enrollmentList = new ArrayList<>(course.getEnrollments());
         if(enrollmentList.size() == 0) {
-            response.put("There is no students in this class", new ArrayList<>());
+            response.put("futureHomework", new ArrayList<>());
+            response.put("pastHomework", new ArrayList<>());
             return ResponseEntity.ok().body(response);
         }
         //get all homework by one enrollment
