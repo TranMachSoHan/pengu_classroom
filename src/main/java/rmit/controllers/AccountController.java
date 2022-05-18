@@ -36,25 +36,6 @@ public class AccountController {
         return ResponseEntity.ok().body(accountService.getAccountById(accountId));
     }
 
-//    @GetMapping("accounts/login/{username, password}")
-//    public ResponseEntity<Account>  getAccountByUsername(@PathVariable(value = "username") String username, String password) throws ResourceNotFoundException {
-//        return ResponseEntity.ok().body(accountService.getAccountByUsername(username));
-//    }
-
-
-//    @PostMapping("accounts/signup")
-//    public Account signUp( @RequestBody Account account) {
-//        if (account.getRole().equals("STUDENT")) {
-//            Student student = new Student(account.getUsername(),
-//                    account.getPassword());
-//            return studentService.createStudent(student);
-//        }
-//        Teacher teacher = new Teacher(
-//                account.getId(), account.getUsername(),
-//                account.getPassword(), account.getProfile_picture());
-//        return teacherService.createTeacher(teacher);
-//    }
-
     @PutMapping("accounts/{id}")
     public ResponseEntity<Account> updateAccount(@PathVariable(value = "id") Integer accountId,
                                                    @RequestBody Account accountDetails) throws ResourceNotFoundException {

@@ -27,7 +27,7 @@ public class S3Controller {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("homeworks/{id}/upload-file")
+    @PostMapping("students/homeworks/{id}/upload-file")
     public String upload(@RequestParam("file")MultipartFile multipartFile,
                          @PathVariable("id") int homeworkId) throws ResourceNotFoundException {
         Homework homework = homeworkService.getHomeworkById(homeworkId);
@@ -35,14 +35,14 @@ public class S3Controller {
         return s3Service.saveSubmission(multipartFile,homework);
     }
 
-    @PostMapping("accounts/{id}/upload-profile-picture")
+    @PostMapping({"students/{id}/upload-profile-picture","teachers/{id}/upload-profile-picture"})
     public String uploadProfilePic(@RequestParam("picture")MultipartFile multipartFile,
                                    @PathVariable("id") int accountId) throws ResourceNotFoundException {
         Account account = accountService.getAccountById(accountId);
         return s3Service.saveProfilePicture(multipartFile,account);
     }
 
-    @GetMapping("download/{filename}")
+    @GetMapping({"students/download/{filename}","teachers/download/{filename}"})
     public ResponseEntity<byte[]> download(@PathVariable("filename") String filename) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-type", MediaType.ALL_VALUE);
