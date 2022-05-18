@@ -100,7 +100,7 @@ public class TeacherController {
         }
         return ResponseEntity.ok().body(list);
     }
-
+    
     @GetMapping("teachers/get_timetable/{teacher_id}")
     public ResponseEntity<List<Map<String, Object>>> getTeacherTimetable(@PathVariable(value = "teacher_id") int accountId)
             throws ResourceNotFoundException {
@@ -136,21 +136,6 @@ public class TeacherController {
 //        Collection<Student> students = courseService;
 //    }
 
-
-//
-//    @GetMapping("courses/{course_id}/students/{student_id}/all-homeworks")
-//    public ResponseEntity<List<Homework>> getAllHomeworksByStudentIdAndCourseId(
-//            @PathVariable(value = "course_id") int courseId,
-//            @PathVariable(value = "student_id") int studentId) throws ResourceNotFoundException {
-//        Course course = courseService.getCourseById(courseId);
-//        Student student = studentService.getStudentById(studentId);
-//        List<Enrollment> enrollmentList = course.getEnrollments().stream()
-//                .filter(student.getEnrollments()::contains)
-//                .collect(Collectors.toList());
-//        if(enrollmentList.isEmpty()) return ResponseEntity.ok().body(new ArrayList<>());
-//        Enrollment enrollment = enrollmentList.get(0);
-//        return ResponseEntity.ok().body(new ArrayList<>(enrollment.getHomeworks()));
-//    }
 
     //invite student
     @PutMapping("teachers/courses/{course_id}/add-student")
@@ -193,7 +178,8 @@ public class TeacherController {
         Map<String,List<Homework>> response = new HashMap<>();
         List<Enrollment> enrollmentList = new ArrayList<>(course.getEnrollments());
         if(enrollmentList.size() == 0) {
-            response.put("There is no students in this class", new ArrayList<>());
+            response.put("futureHomework", new ArrayList<>());
+            response.put("pastHomework", new ArrayList<>());
             return ResponseEntity.ok().body(response);
         }
         //get all homework by one enrollment
